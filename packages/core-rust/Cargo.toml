@@ -1,0 +1,30 @@
+[package]
+name = "tupan-core"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+wasm-bindgen = "0.2"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+nalgebra = { version = "0.33", features = ["serde-serialize"] }
+petgraph = { version = "0.6", features = ["serde-1"] }
+num-traits = "0.2"
+uuid = { version = "1.0", features = ["v4", "serde"] }
+thiserror = "1.0"
+indexmap = { version = "2.0", features = ["serde"] }
+
+[dev-dependencies]
+criterion = "0.5"
+
+[profile.release]
+opt-level = "z"     # Optimize for size
+lto = true          # Enable link-time optimization
+codegen-units = 1   # Better optimization
+
+[[bench]]
+name = "solver_bench"
+harness = false

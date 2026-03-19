@@ -1,0 +1,6 @@
+packages:
+  - 'packages/*'
+  - 'tools/*'
+
+shamefully-hoist: false
+strict-peer-dependencies: false
