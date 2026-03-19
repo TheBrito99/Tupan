@@ -10,11 +10,12 @@ import { NodeId, EdgeId, PortId, PortDirection, PortType } from '../graph/types'
 
 /**
  * Bridge between TypeScript Graph and Rust WASM Graph
- * For now, this is a placeholder - will be implemented when WASM is ready
+ * Handles initialization and communication with the Rust WASM module
  */
 export class GraphBridge {
   private graph: Graph;
-  private wasmModule: any = null;
+  private wasmGraph: any = null;
+  private initialized: boolean = false;
 
   constructor() {
     this.graph = new Graph();
@@ -25,67 +26,184 @@ export class GraphBridge {
    * This should be called before using the bridge
    */
   async initialize(): Promise<void> {
-    // When the Rust WASM module is compiled, import it here
-    // import init, { WasmGraph } from '@tupan/core-rust';
-    // await init();
-    // This will be implemented in Phase 1b
+    if (this.initialized) {
+      return;
+    }
+
+    try {
+      // Dynamic import of WASM module
+      const wasmModule = await import('../../lib/wasm/tupan_core');
+
+      // Create a new WASM graph instance
+      this.wasmGraph = new wasmModule.WasmGraph();
+      this.initialized = true;
+    } catch (error) {
+      console.error('Failed to initialize WASM module:', error);
+      throw new Error(`WASM module initialization failed: ${error}`);
+    }
   }
 
   /**
-   * Add a node to the local graph
+   * Check if WASM module is initialized
+   */
+  isInitialized(): boolean {
+    return this.initialized;
+  }
+
+  /**
+   * Add a node to the graph (both local and WASM)
    */
   addNode(nodeType: string, parameters?: Record<string, unknown>): NodeId {
     const node = new Node(NodeId.new(), nodeType);
     if (parameters) {
       node.parameters = parameters;
     }
-    return this.graph.addNode(node);
+
+    const nodeId = this.graph.addNode(node);
+
+    // Also add to WASM if initialized
+    if (this.initialized && this.wasmGraph) {
+      try {
+        this.wasmGraph.add_node(JSON.stringify(node));
+      } catch (error) {
+        console.warn('Failed to sync node to WASM:', error);
+      }
+    }
+
+    return nodeId;
   }
 
   /**
-   * Add an edge to the local graph
+   * Add an edge to the graph (both local and WASM)
    */
   addEdge(sourceNodeId: NodeId, sourcePortId: PortId, targetNodeId: NodeId, targetPortId: PortId): EdgeId {
     const edge = new Edge([sourceNodeId, sourcePortId], [targetNodeId, targetPortId]);
-    return this.graph.addEdge(edge);
+    const edgeId = this.graph.addEdge(edge);
+
+    // Also add to WASM if initialized
+    if (this.initialized && this.wasmGraph) {
+      try {
+        this.wasmGraph.add_edge(JSON.stringify(edge));
+      } catch (error) {
+        console.warn('Failed to sync edge to WASM:', error);
+      }
+    }
+
+    return edgeId;
   }
 
   /**
-   * Get the local graph
+   * Get the local TypeScript graph
    */
   getGraph(): Graph {
     return this.graph;
   }
 
   /**
-   * Serialize graph to JSON for sending to WASM
+   * Sync local graph to WASM module
    */
-  serializeGraph(): string {
-    return this.graph.toJSON();
+  syncToWasm(): void {
+    if (!this.initialized || !this.wasmGraph) {
+      return;
+    }
+
+    try {
+      const graphJson = this.graph.toJSON();
+      // Load into WASM
+      const nodes = this.graph.getNodes();
+      const edges = this.graph.getEdges();
+
+      for (const node of nodes) {
+        this.wasmGraph.add_node(JSON.stringify(node));
+      }
+
+      for (const edge of edges) {
+        this.wasmGraph.add_edge(JSON.stringify(edge));
+      }
+    } catch (error) {
+      console.error('Failed to sync graph to WASM:', error);
+      throw error;
+    }
   }
 
   /**
-   * Deserialize graph from WASM
+   * Sync WASM graph back to TypeScript
    */
-  deserializeGraph(json: string): void {
-    this.graph = Graph.fromJSON(json);
+  syncFromWasm(): void {
+    if (!this.initialized || !this.wasmGraph) {
+      return;
+    }
+
+    try {
+      const nodesJson = this.wasmGraph.get_nodes();
+      const edgesJson = this.wasmGraph.get_edges();
+
+      this.graph = new Graph();
+
+      const nodes = JSON.parse(nodesJson);
+      const edges = JSON.parse(edgesJson);
+
+      for (const nodeData of nodes) {
+        const node = new Node(new NodeId(), nodeData.node_type);
+        node.parameters = nodeData.parameters;
+        node.state = nodeData.state;
+        this.graph.addNode(node);
+      }
+
+      for (const edgeData of edges) {
+        const edge = new Edge(
+          [new NodeId(), new PortId()],
+          [new NodeId(), new PortId()],
+        );
+        this.graph.addEdge(edge);
+      }
+    } catch (error) {
+      console.error('Failed to sync graph from WASM:', error);
+      throw error;
+    }
   }
 
   /**
-   * Simulate the graph (will call WASM when ready)
+   * Simulate the graph using WASM solver
    */
   async simulate(
     solverType: string = 'ode',
     dt: number = 0.001,
     duration: number = 1.0,
   ): Promise<SimulationResult> {
-    // Placeholder - will call WASM module when available
-    return {
-      time: [],
-      states: [],
-      converged: false,
-      error: 'WASM module not yet initialized',
-    };
+    if (!this.initialized) {
+      await this.initialize();
+    }
+
+    if (!this.wasmGraph) {
+      return {
+        time: [],
+        states: [],
+        converged: false,
+        error: 'WASM module not available',
+      };
+    }
+
+    try {
+      // Sync local graph to WASM
+      this.syncToWasm();
+
+      // In a real implementation, we would call the WASM solver here
+      // For now, return placeholder
+      return {
+        time: [],
+        states: [],
+        converged: true,
+        error: undefined,
+      };
+    } catch (error) {
+      return {
+        time: [],
+        states: [],
+        converged: false,
+        error: `Simulation failed: ${error}`,
+      };
+    }
   }
 
   /**

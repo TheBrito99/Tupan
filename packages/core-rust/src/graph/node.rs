@@ -27,6 +27,13 @@ impl std::fmt::Display for NodeId {
     }
 }
 
+impl NodeId {
+    /// Create a node ID from a UUID string
+    pub fn from_string(s: &str) -> Result<Self, uuid::Error> {
+        Ok(NodeId(Uuid::parse_str(s)?))
+    }
+}
+
 /// Core trait that all nodes must implement
 pub trait Node: Serialize + for<'de> Deserialize<'de> + Send + Sync {
     /// Get the unique ID of this node

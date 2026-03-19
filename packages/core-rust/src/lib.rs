@@ -15,6 +15,9 @@ pub mod graph;
 pub mod solvers;
 pub mod error;
 
+#[cfg(target_arch = "wasm32")]
+pub mod wasm;
+
 // Re-export main types for easier access
 pub use graph::{Graph, Node, Edge, NodeId, PortId, Port};
 pub use solvers::{Solver, OdeSolver, SolverConfig};
