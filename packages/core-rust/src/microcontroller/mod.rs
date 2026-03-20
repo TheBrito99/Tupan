@@ -21,6 +21,7 @@ pub mod timer;
 pub mod gpio;
 pub mod adc;
 pub mod pwm;
+pub mod codegen;
 
 pub use cpu::ArmCpuEmulator;
 pub use instruction::{Instruction, InstructionSet, ArmThumb2};
@@ -32,6 +33,7 @@ pub use timer::{SysTick, GpTimer, TimerMode};
 pub use gpio::{GpioPin, GpioPort, PinMode, PullMode};
 pub use adc::{Adc, AdcChannel, AdcResolution, ConversionMode};
 pub use pwm::{PwmTimer, PwmChannel, PwmMode};
+pub use codegen::{FirmwareCode, CodeGenerator, McuTarget};
 
 #[cfg(test)]
 mod tests;
