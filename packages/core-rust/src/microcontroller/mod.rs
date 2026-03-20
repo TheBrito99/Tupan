@@ -22,6 +22,8 @@ pub mod gpio;
 pub mod adc;
 pub mod pwm;
 pub mod codegen;
+pub mod circuit_interface;
+pub mod coupled_simulator;
 
 pub use cpu::ArmCpuEmulator;
 pub use instruction::{Instruction, InstructionSet, ArmThumb2};
@@ -34,6 +36,11 @@ pub use gpio::{GpioPin, GpioPort, PinMode, PullMode};
 pub use adc::{Adc, AdcChannel, AdcResolution, ConversionMode};
 pub use pwm::{PwmTimer, PwmChannel, PwmMode};
 pub use codegen::{FirmwareCode, CodeGenerator, McuTarget};
+pub use circuit_interface::{
+    MicrocontrollerCircuitInterface, CircuitNodeId, CircuitElementId,
+    GpioMapping, AdcMapping,
+};
+pub use coupled_simulator::{CoupledMicrocontrollerCircuitSim, SimulationStep};
 
 #[cfg(test)]
 mod tests;
