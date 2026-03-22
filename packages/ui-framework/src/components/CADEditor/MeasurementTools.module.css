@@ -1,0 +1,494 @@
+/**
+ * Measurement Tools Styles
+ * Phase 17.5: Advanced Features
+ */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.header {
+  padding: 12px 12px;
+  border-bottom: 1px solid #e0e0e0;
+  background: #f9f9f9;
+  flex-shrink: 0;
+}
+
+.header h3 {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: #333333;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Tabs */
+
+.tabs {
+  display: flex;
+  gap: 4px;
+  padding: 8px 8px;
+  background: #f5f5f5;
+  border-bottom: 1px solid #e0e0e0;
+  overflow-x: auto;
+  flex-shrink: 0;
+}
+
+.tab {
+  padding: 6px 10px;
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 3px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  color: #666666;
+}
+
+.tab:hover {
+  border-color: #0066cc;
+  color: #0066cc;
+}
+
+.tab.active {
+  background: #0066cc;
+  color: #ffffff;
+  border-color: #0066cc;
+}
+
+/* Calculator */
+
+.calculator {
+  flex: 1;
+  padding: 12px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.formGroup label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #666666;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.formGroup input,
+.formGroup select {
+  padding: 6px 8px;
+  background: #ffffff;
+  border: 1px solid #d0d0d0;
+  border-radius: 4px;
+  font-size: 12px;
+  font-family: 'Monaco', 'Menlo', monospace;
+  color: #333333;
+  transition: all 0.2s ease;
+}
+
+.formGroup input:focus,
+.formGroup select:focus {
+  outline: none;
+  border-color: #0066cc;
+  box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+}
+
+.formGroup input::placeholder {
+  color: #999999;
+}
+
+/* Calculate Button */
+
+.calculateButton {
+  padding: 8px 12px;
+  background: #0066cc;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 4px;
+}
+
+.calculateButton:hover {
+  background: #0052a3;
+  box-shadow: 0 2px 8px rgba(0, 102, 204, 0.3);
+}
+
+/* Result */
+
+.result {
+  padding: 12px;
+  background: #e5fded;
+  border: 1px solid #34a853;
+  border-radius: 4px;
+  margin-top: 8px;
+}
+
+.result strong {
+  color: #238636;
+  font-family: 'Monaco', 'Menlo', monospace;
+  font-size: 14px;
+}
+
+.result div {
+  font-size: 11px;
+  color: #238636;
+  margin-top: 4px;
+}
+
+.result div:first-child {
+  margin-top: 0;
+}
+
+.result strong:first-of-type {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+/* History */
+
+.history {
+  display: flex;
+  flex-direction: column;
+  flex: 0.6;
+  border-top: 1px solid #e0e0e0;
+  background: #f9f9f9;
+  overflow: hidden;
+}
+
+.historyHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  border-bottom: 1px solid #e0e0e0;
+  flex-shrink: 0;
+}
+
+.historyHeader h4 {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 600;
+  color: #666666;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.clearButton {
+  padding: 4px 8px;
+  background: #ffffff;
+  border: 1px solid #d0d0d0;
+  border-radius: 3px;
+  font-size: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  color: #666666;
+  transition: all 0.2s ease;
+}
+
+.clearButton:hover {
+  background: #ffe5e5;
+  border-color: #f85149;
+  color: #f85149;
+}
+
+/* Measurements List */
+
+.measurementsList {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px;
+}
+
+.emptyState {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #999999;
+  text-align: center;
+}
+
+.emptyState p {
+  margin: 0;
+  font-size: 12px;
+}
+
+.measurementItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 3px;
+  gap: 8px;
+}
+
+.measurementItem:hover {
+  border-color: #0066cc;
+  background: #f0f6ff;
+}
+
+.measurementContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.measurementType {
+  font-size: 10px;
+  font-weight: 600;
+  color: #0066cc;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.measurementValue {
+  font-size: 12px;
+  font-weight: 600;
+  color: #333333;
+  font-family: 'Monaco', 'Menlo', monospace;
+  margin-top: 2px;
+}
+
+.deleteButton {
+  padding: 2px 6px;
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 2px;
+  font-size: 11px;
+  cursor: pointer;
+  color: #999999;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.deleteButton:hover {
+  background: #ffe5e5;
+  border-color: #f85149;
+  color: #f85149;
+}
+
+/* Scrollbars */
+
+.calculator::-webkit-scrollbar,
+.measurementsList::-webkit-scrollbar {
+  width: 6px;
+}
+
+.calculator::-webkit-scrollbar-track,
+.measurementsList::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.calculator::-webkit-scrollbar-thumb,
+.measurementsList::-webkit-scrollbar-thumb {
+  background: #d0d0d0;
+  border-radius: 3px;
+}
+
+.calculator::-webkit-scrollbar-thumb:hover,
+.measurementsList::-webkit-scrollbar-thumb:hover {
+  background: #999999;
+}
+
+/* Dark Mode */
+
+@media (prefers-color-scheme: dark) {
+  .container {
+    background: #2a2a2a;
+  }
+
+  .header {
+    background: #333333;
+    border-bottom-color: #444444;
+  }
+
+  .header h3 {
+    color: #e5e5e5;
+  }
+
+  .tabs {
+    background: #2a2a2a;
+    border-bottom-color: #444444;
+  }
+
+  .tab {
+    background: #3a3a3a;
+    border-color: #444444;
+    color: #8b949e;
+  }
+
+  .tab:hover {
+    border-color: #58a6ff;
+    color: #58a6ff;
+  }
+
+  .tab.active {
+    background: #0066cc;
+    color: #ffffff;
+    border-color: #0066cc;
+  }
+
+  .calculator {
+    background: transparent;
+  }
+
+  .formGroup input,
+  .formGroup select {
+    background: #3a3a3a;
+    border-color: #444444;
+    color: #e5e5e5;
+  }
+
+  .formGroup input:focus,
+  .formGroup select:focus {
+    border-color: #58a6ff;
+    box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.1);
+  }
+
+  .formGroup input::placeholder {
+    color: #666666;
+  }
+
+  .formGroup label {
+    color: #8b949e;
+  }
+
+  .calculateButton {
+    background: #0066cc;
+  }
+
+  .calculateButton:hover {
+    background: #0052a3;
+  }
+
+  .result {
+    background: #1f3a2f;
+    border-color: #238636;
+  }
+
+  .result strong {
+    color: #3fb950;
+  }
+
+  .result div {
+    color: #3fb950;
+  }
+
+  .history {
+    background: #333333;
+    border-top-color: #444444;
+  }
+
+  .historyHeader {
+    border-bottom-color: #444444;
+  }
+
+  .historyHeader h4 {
+    color: #8b949e;
+  }
+
+  .clearButton {
+    background: #3a3a3a;
+    border-color: #444444;
+    color: #8b949e;
+  }
+
+  .clearButton:hover {
+    background: #5a3a3a;
+    border-color: #f85149;
+    color: #f85149;
+  }
+
+  .emptyState {
+    color: #8b949e;
+  }
+
+  .measurementItem {
+    background: #3a3a3a;
+    border-color: #444444;
+  }
+
+  .measurementItem:hover {
+    border-color: #58a6ff;
+    background: #1f3a5e;
+  }
+
+  .measurementType {
+    color: #58a6ff;
+  }
+
+  .measurementValue {
+    color: #e5e5e5;
+  }
+
+  .deleteButton {
+    background: #3a3a3a;
+    border-color: #444444;
+    color: #8b949e;
+  }
+
+  .deleteButton:hover {
+    background: #5a3a3a;
+    border-color: #f85149;
+    color: #f85149;
+  }
+
+  .calculator::-webkit-scrollbar-thumb,
+  .measurementsList::-webkit-scrollbar-thumb {
+    background: #444444;
+  }
+
+  .calculator::-webkit-scrollbar-thumb:hover,
+  .measurementsList::-webkit-scrollbar-thumb:hover {
+    background: #666666;
+  }
+}
+
+/* Responsive */
+
+@media (max-width: 600px) {
+  .tabs {
+    flex-wrap: wrap;
+  }
+
+  .history {
+    flex: 0.4;
+  }
+
+  .measurementItem {
+    flex-wrap: wrap;
+  }
+
+  .deleteButton {
+    flex-grow: 1;
+  }
+}

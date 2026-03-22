@@ -1,0 +1,135 @@
+.mathPreview {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #1f2529;
+}
+
+.inlineMode {
+  display: inline;
+  padding: 0 2px;
+  font-size: 0.95em;
+}
+
+.displayMode {
+  display: block;
+  padding: 12px 0;
+  text-align: center;
+  font-size: 1.1em;
+  margin: 8px 0;
+}
+
+.inline {
+  vertical-align: middle;
+  margin: 0 2px;
+}
+
+.mathBatch {
+  width: 100%;
+  padding: 0;
+}
+
+/* KaTeX output styling */
+.mathPreview :global(.katex) {
+  font-size: 1em;
+}
+
+.displayMode :global(.katex) {
+  font-size: 1.2em;
+}
+
+/* Error display */
+.mathError {
+  display: inline-block;
+  padding: 2px 6px;
+  background: rgba(220, 53, 69, 0.1);
+  border: 1px dashed rgba(220, 53, 69, 0.4);
+  border-radius: 3px;
+  color: #dc3545;
+  font-size: 0.9em;
+}
+
+.mathError code {
+  font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
+  font-size: 0.95em;
+}
+
+/* Display math error */
+.displayMath {
+  padding: 16px;
+  background: rgba(220, 53, 69, 0.05);
+  border-left: 4px solid rgba(220, 53, 69, 0.3);
+  margin: 12px 0;
+  border-radius: 4px;
+}
+
+/* Matrix and complex structures */
+.mathPreview :global(.katex-display) {
+  overflow-x: auto;
+  padding: 8px 0;
+}
+
+/* Fraction styling */
+.mathPreview :global(.frac-line) {
+  border-color: currentColor;
+}
+
+/* Summation and integral styles */
+.mathPreview :global(.sizing.reset-size6.size6) {
+  font-size: 0.7em;
+}
+
+/* Better spacing for fractions */
+.mathPreview :global(.mopen):not(:global(.delimsizing)):not(:global(.nulldelimiter))::after {
+  margin-right: 0.1em;
+}
+
+.mathPreview :global(.mclose):not(:global(.delimsizing)):not(:global(.nulldelimiter))::before {
+  margin-left: 0.1em;
+}
+
+/* Improve readability of superscripts and subscripts */
+.mathPreview :global(.sizing) {
+  padding: 0 0.1em;
+}
+
+/* Custom font adjustments */
+.mathPreview :global(.mathrm),
+.mathPreview :global(.rm) {
+  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.mathPreview :global(.mathtt),
+.mathPreview :global(.text.tt) {
+  font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
+  font-size: 0.9em;
+}
+
+/* Highlight for emphasis */
+.mathPreview :global(.mathbf),
+.mathPreview :global(.textbf) {
+  font-weight: 700;
+}
+
+.mathPreview :global(.mathit),
+.mathPreview :global(.textit) {
+  font-style: italic;
+}
+
+/* Better alignment for operators */
+.mathPreview :global(.mbin)::before {
+  margin-right: 0.2em;
+}
+
+.mathPreview :global(.mbin)::after {
+  margin-left: 0.2em;
+}
+
+/* Square root symbol styling */
+.mathPreview :global(.sqrt-sign) {
+  color: inherit;
+}
+
+/* Limit operator styling */
+.mathPreview :global(.op-limits) {
+  font-size: 0.8em;
+}

@@ -1,48 +1,65 @@
-//! Tupan Core: Unified simulation engine for mechatronics
-//!
-//! This library provides the computational foundation for Tupan, a comprehensive
-//! mechatronics engineering platform. It implements:
-//!
-//! - Unified graph-based abstraction for all simulator types
-//! - Numerical solvers (ODE, DAE, steady-state)
-//! - Bond graph modeling and causality assignment
-//! - Physical domain implementations (electrical, thermal, mechanical, etc.)
-//! - Symbolic mathematics engine
-//!
-//! All computation is exposed to JavaScript/TypeScript via wasm-bindgen.
+/**
+ * Tupan Core Library
+ *
+ * Rust-based computation engine for mechatronics engineering
+ * Compiled to WASM for browser execution
+ *
+ * Modules:
+ * - cad: 3D CAD system with BREP kernel (Phase 18)
+ * - geometry: 2D CAD primitives and operations
+ * - dxf: DXF file format support
+ * - bond_graph: Bond graph simulation
+ * - manufacturing: CAM, toolpath generation, G-code (Phase 19)
+ */
 
-pub mod graph;
-pub mod solvers;
-pub mod error;
+pub mod cad;
+pub mod geometry;
+pub mod dxf;
+pub mod bond_graph;
+pub mod manufacturing;
+pub mod microcontroller;
+pub mod optimization;
+pub mod clifford_algebra;
+pub mod ml;
 
-#[cfg(target_arch = "wasm32")]
+#[cfg(feature = "wasm")]
 pub mod wasm;
 
-// Re-export main types for easier access
-pub use graph::{Graph, Node, Edge, NodeId, PortId, Port};
-pub use solvers::{Solver, OdeSolver, SolverConfig};
-pub use error::{TupanError, Result};
+// 3D CAD exports
+pub use cad::geometry::{Point3D, Vector3D, Matrix3x3, BoundingBox};
+pub use cad::{BREPShell, CADDocument, CADOperations};
 
-#[cfg(target_arch = "wasm32")]
-use wasm_bindgen::prelude::*;
+// 2D geometry exports
+pub use geometry::{
+    Point, GeometricEntity, BoundingBox as BoundingBox2D, Transform2D, ConstraintSolver,
+};
+pub use dxf::{DxfDrawing, DxfImporter, DxfExporter};
 
-#[cfg(target_arch = "wasm32")]
-#[wasm_bindgen(start)]
-pub fn init_wasm() {
-    // Any initialization code for WASM goes here
-    #[cfg(feature = "console_error_panic_hook")]
-    console_error_panic_hook::set_once();
-}
+// Manufacturing exports
+pub use manufacturing::{
+    CAMEngine, Tool, ToolType, ToolLibrary, FeedsSpeedsCalculator, CuttingParameters,
+    Toolpath, ToolpathSegment, CuttingStrategy, CollisionDetector,
+    CuttingForceCalculator, SpindleLoadCalculator, ThermalCalculator,
+};
 
-/// Library version
-pub const VERSION: &str = env!("CARGO_PKG_VERSION");
+// Microcontroller exports (Phase 22)
+pub use microcontroller::{
+    ArmCpuEmulator, Instruction, InstructionSet, ArmThumb2,
+    CpuRegisters, RegisterId, CpuMemory, CpuState, ExecutionState,
+};
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+// Machine Learning exports (Phase 28)
+pub use ml::{
+    Agent, AgentConfig, ActionSpace, StateSpace, Experience, ExperienceBuffer,
+    RewardFunction, RewardConfig, FormationReward, RewardBreakdown,
+    NeuralNetwork, NetworkLayer, ActivationFunction,
+};
 
-    #[test]
-    fn test_version() {
-        assert!(!VERSION.is_empty());
-    }
-}
+// WASM exports (conditional)
+#[cfg(feature = "wasm")]
+pub use wasm::{
+    WasmManufacturingSimulator, WasmCuttingForceRequest, WasmSpindleLoadRequest,
+    WasmThermalRequest, WasmManufacturingResult,
+    WasmOptimizationSimulator, WasmOptimizationRequest, WasmOptimizationResult,
+    WasmDFMRequest, WasmDFMResult, WasmDFMViolation,
+};

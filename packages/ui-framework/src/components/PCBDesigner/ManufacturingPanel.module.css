@@ -1,0 +1,361 @@
+/**
+ * Manufacturing Panel Styles
+ */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+/* Tab Navigation */
+.tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 2px solid #e0e0e0;
+  background: #f5f5f5;
+  flex-shrink: 0;
+}
+
+.tab {
+  flex: 1;
+  padding: 12px 16px;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  color: #666;
+  transition: all 0.2s;
+  outline: none;
+}
+
+.tab:hover {
+  color: #333;
+  background: #fafafa;
+}
+
+.tab.active {
+  color: #2196f3;
+  border-bottom-color: #2196f3;
+  background: white;
+}
+
+/* Tab Content */
+.content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.tabContent {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tabContent h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.description {
+  margin: 0;
+  font-size: 12px;
+  color: #666;
+  line-height: 1.5;
+}
+
+/* Info Stats */
+.info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 8px;
+  padding: 12px;
+  background: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  border-radius: 3px;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stat .label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #666;
+}
+
+.stat .value {
+  font-size: 18px;
+  font-weight: 700;
+  color: #2196f3;
+  font-family: 'Courier New', monospace;
+}
+
+/* Controls */
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.controls label {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: #666;
+}
+
+.controls select {
+  flex: 1;
+  padding: 6px 10px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  font-size: 12px;
+  background: white;
+  cursor: pointer;
+}
+
+.controls select:focus {
+  outline: none;
+  border-color: #2196f3;
+  box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.1);
+}
+
+/* Button */
+.button {
+  padding: 10px 16px;
+  background: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  align-self: flex-start;
+}
+
+.button:hover {
+  background: #1976d2;
+}
+
+.button:active {
+  background: #1565c0;
+}
+
+/* Exported Files */
+.exportedFiles {
+  padding: 12px;
+  background: #e8f5e9;
+  border: 1px solid #81c784;
+  border-radius: 3px;
+  font-size: 12px;
+}
+
+.exportedFiles h4 {
+  margin: 0 0 8px 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: #2e7d32;
+}
+
+.exportedFiles ul {
+  margin: 0;
+  padding-left: 16px;
+  list-style: none;
+}
+
+.exportedFiles li {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 4px 0;
+}
+
+.filename {
+  flex: 1;
+  color: #333;
+  font-family: 'Courier New', monospace;
+  font-weight: 600;
+}
+
+.badge {
+  padding: 2px 6px;
+  background: #81c784;
+  color: white;
+  border-radius: 2px;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+/* Output Display */
+.output {
+  flex: 1;
+  padding: 12px;
+  background: #f5f5f5;
+  border-top: 1px solid #ddd;
+  overflow-y: auto;
+}
+
+.output pre {
+  margin: 0;
+  padding: 12px;
+  background: #1e1e1e;
+  color: #d4d4d4;
+  font-size: 11px;
+  font-family: 'Courier New', monospace;
+  line-height: 1.5;
+  border-radius: 3px;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    height: auto;
+  }
+
+  .tabs {
+    flex-wrap: wrap;
+  }
+
+  .tab {
+    flex: 0 1 auto;
+    padding: 10px 12px;
+    font-size: 11px;
+  }
+
+  .info {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .output pre {
+    font-size: 10px;
+  }
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+  .container {
+    background: #2d2d2d;
+    border-color: #444;
+  }
+
+  .tabs {
+    background: #1e1e1e;
+    border-bottom-color: #444;
+  }
+
+  .tab {
+    color: #999;
+  }
+
+  .tab:hover {
+    color: #ccc;
+    background: #3d3d3d;
+  }
+
+  .tab.active {
+    color: #64b5f6;
+    border-bottom-color: #64b5f6;
+    background: #2d2d2d;
+  }
+
+  .content {
+    background: #2d2d2d;
+  }
+
+  .tabContent h3 {
+    color: #ccc;
+  }
+
+  .description {
+    color: #999;
+  }
+
+  .info {
+    background: #3d3d3d;
+    border-color: #555;
+  }
+
+  .stat .label {
+    color: #999;
+  }
+
+  .stat .value {
+    color: #64b5f6;
+  }
+
+  .controls label {
+    color: #999;
+  }
+
+  .controls select {
+    background: #3d3d3d;
+    border-color: #555;
+    color: #ccc;
+  }
+
+  .controls select:focus {
+    border-color: #64b5f6;
+    box-shadow: 0 0 0 2px rgba(100, 181, 246, 0.2);
+  }
+
+  .button {
+    background: #1976d2;
+  }
+
+  .button:hover {
+    background: #1565c0;
+  }
+
+  .button:active {
+    background: #0d47a1;
+  }
+
+  .exportedFiles {
+    background: #1e3a5f;
+    border-color: #1976d2;
+  }
+
+  .exportedFiles h4 {
+    color: #64b5f6;
+  }
+
+  .filename {
+    color: #ccc;
+  }
+
+  .badge {
+    background: #1976d2;
+  }
+
+  .output {
+    background: #1e1e1e;
+    border-top-color: #444;
+  }
+
+  .output pre {
+    background: #1e1e1e;
+    color: #d4d4d4;
+  }
+}

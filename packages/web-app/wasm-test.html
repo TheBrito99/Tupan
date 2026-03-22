@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tupan WASM Manufacturing Module - Browser Integration Test</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #333;
+    }
+
+    .container {
+      background: white;
+      border-radius: 8px;
+      padding: 30px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    h1 {
+      color: #667eea;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      color: #666;
+      margin-bottom: 30px;
+      font-size: 14px;
+    }
+
+    .status-section {
+      background: #f5f5f5;
+      border-left: 4px solid #667eea;
+      padding: 15px;
+      margin-bottom: 30px;
+      border-radius: 4px;
+    }
+
+    .status-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .status-item:last-child {
+      border-bottom: none;
+    }
+
+    .status-label {
+      font-weight: 600;
+      color: #333;
+    }
+
+    .status-value {
+      padding-left: 20px;
+      text-align: right;
+    }
+
+    .status-value.success {
+      color: #4caf50;
+      font-weight: bold;
+    }
+
+    .status-value.error {
+      color: #f44336;
+      font-weight: bold;
+    }
+
+    .status-value.loading {
+      color: #ff9800;
+      font-weight: bold;
+    }
+
+    .test-section {
+      margin-bottom: 30px;
+    }
+
+    .test-section h2 {
+      color: #333;
+      border-bottom: 2px solid #667eea;
+      padding-bottom: 10px;
+      margin-bottom: 15px;
+    }
+
+    .test-input {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      font-weight: 600;
+      margin-bottom: 5px;
+      font-size: 14px;
+    }
+
+    input,
+    select {
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    input:focus,
+    select:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    button {
+      background: #667eea;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      transition: background 0.3s;
+      margin-right: 10px;
+    }
+
+    button:hover {
+      background: #764ba2;
+    }
+
+    button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+
+    .result-box {
+      background: #f9f9f9;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      padding: 15px;
+      margin-top: 15px;
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .result-box.error {
+      background: #ffebee;
+      border-color: #f44336;
+      color: #d32f2f;
+    }
+
+    .result-box.success {
+      background: #e8f5e9;
+      border-color: #4caf50;
+      color: #2e7d32;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .performance-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    .performance-table th,
+    .performance-table td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .performance-table th {
+      background: #f5f5f5;
+      font-weight: 600;
+    }
+
+    .performance-table tr:hover {
+      background: #f9f9f9;
+    }
+
+    .info-box {
+      background: #e3f2fd;
+      border-left: 4px solid #2196f3;
+      padding: 12px;
+      margin-bottom: 15px;
+      border-radius: 4px;
+      font-size: 14px;
+      color: #1565c0;
+    }
+
+    .memory-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .memory-item {
+      background: #f5f5f5;
+      padding: 12px;
+      border-radius: 4px;
+      text-align: center;
+    }
+
+    .memory-item-value {
+      font-size: 20px;
+      font-weight: bold;
+      color: #667eea;
+      margin: 5px 0;
+    }
+
+    .memory-item-label {
+      font-size: 12px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🔧 Tupan WASM Manufacturing Module</h1>
+    <p class="subtitle">Phase 20 Task 3 - Browser Integration Test</p>
+
+    <!-- Status Section -->
+    <div class="status-section">
+      <div class="status-item">
+        <span class="status-label">WASM Module Status:</span>
+        <span class="status-value" id="wasmStatus">Loading...</span>
+      </div>
+      <div class="status-item">
+        <span class="status-label">Module Version:</span>
+        <span class="status-value" id="moduleVersion">—</span>
+      </div>
+      <div class="status-item">
+        <span class="status-label">Supported Materials:</span>
+        <span class="status-value" id="supportedMaterials">—</span>
+      </div>
+      <div class="status-item">
+        <span class="status-label">Tool Materials:</span>
+        <span class="status-value" id="toolMaterials">—</span>
+      </div>
+      <div class="status-item">
+        <span class="status-label">Spindle Specs:</span>
+        <span class="status-value" id="spindleSpecs">—</span>
+      </div>
+    </div>
+
+    <!-- Cutting Forces Test -->
+    <div class="test-section">
+      <h2>⚙️ Cutting Forces Calculation (Kienzle Equation)</h2>
+      <div class="info-box">
+        Tests the Kienzle equation for cutting force prediction with various materials and parameters.
+      </div>
+
+      <div class="test-input">
+        <div class="form-group">
+          <label>Material:</label>
+          <select id="cuttingMaterial">
+            <option>Steel</option>
+            <option>Aluminum</option>
+            <option>Titanium</option>
+            <option>Cast Iron</option>
+            <option>Stainless Steel</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Feed per Tooth (mm):</label>
+          <input type="number" id="cuttingFeed" value="0.1" step="0.01" />
+        </div>
+        <div class="form-group">
+          <label>Depth of Cut (mm):</label>
+          <input type="number" id="cuttingDepth" value="2.0" step="0.1" />
+        </div>
+        <div class="form-group">
+          <label>Cutting Speed (m/min):</label>
+          <input type="number" id="cuttingSpeed" value="150" step="10" />
+        </div>
+        <div class="form-group">
+          <label>Flute Count:</label>
+          <input type="number" id="fluteCou" value="2" min="1" max="4" />
+        </div>
+        <div class="form-group">
+          <label>&nbsp;</label>
+          <button onclick="calculateCuttingForces()">Calculate Forces</button>
+        </div>
+      </div>
+      <div class="result-box" id="cuttingResult" style="display: none;"></div>
+    </div>
+
+    <!-- Spindle Load Test -->
+    <div class="test-section">
+      <h2>🔩 Spindle Load Analysis (Bearing Life Prediction)</h2>
+      <div class="info-box">
+        Tests spindle load calculation and bearing life prediction with thermal load estimation.
+      </div>
+
+      <div class="test-input">
+        <div class="form-group">
+          <label>Cutting Power (W):</label>
+          <input type="number" id="spinndlePower" value="1000" step="100" />
+        </div>
+        <div class="form-group">
+          <label>Spindle Spec:</label>
+          <select id="spindleSpec">
+            <option>generic_3hp</option>
+            <option>cnc_vertical_mill</option>
+            <option>high_speed_spindle</option>
+            <option>high_torque_spindle</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Spindle Speed (RPM):</label>
+          <input type="number" id="spindleSpeed" value="3000" step="100" />
+        </div>
+        <div class="form-group">
+          <label>&nbsp;</label>
+          <button onclick="calculateSpindleLoad()">Calculate Load</button>
+        </div>
+      </div>
+      <div class="result-box" id="spindleResult" style="display: none;"></div>
+    </div>
+
+    <!-- Thermal Analysis Test -->
+    <div class="test-section">
+      <h2>🌡️ Thermal Analysis (Merchant Model + Arrhenius)</h2>
+      <div class="info-box">
+        Tests thermal analysis with chip, tool, and workpiece temperature calculations.
+      </div>
+
+      <div class="test-input">
+        <div class="form-group">
+          <label>Workpiece Material:</label>
+          <select id="thermalWorkpiece">
+            <option>Steel</option>
+            <option>Aluminum</option>
+            <option>Titanium</option>
+            <option>Cast Iron</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Tool Material:</label>
+          <select id="thermalTool">
+            <option>HSS</option>
+            <option>Carbide</option>
+            <option>Ceramic</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Cutting Power (W):</label>
+          <input type="number" id="thermalPower" value="1000" step="100" />
+        </div>
+        <div class="form-group">
+          <label>Chip Area (mm²):</label>
+          <input type="number" id="chipArea" value="10" step="1" />
+        </div>
+        <div class="form-group">
+          <label>Cutting Time (s):</label>
+          <input type="number" id="cuttingTime" value="60" step="10" />
+        </div>
+        <div class="form-group">
+          <label>Ambient Temperature (°C):</label>
+          <input type="number" id="ambientTemp" value="25" step="1" />
+        </div>
+        <div class="form-group">
+          <label>Coolant Available:</label>
+          <select id="coolantAvailable">
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>&nbsp;</label>
+          <button onclick="analyzeThermal()">Analyze Thermal</button>
+        </div>
+      </div>
+      <div class="result-box" id="thermalResult" style="display: none;"></div>
+    </div>
+
+    <!-- Performance Test -->
+    <div class="test-section">
+      <h2>⚡ Performance Benchmarking</h2>
+      <div class="info-box">
+        Run performance tests to compare WASM vs mock implementations.
+      </div>
+      <div class="button-group">
+        <button onclick="runPerformanceTest(10)">10 Iterations</button>
+        <button onclick="runPerformanceTest(100)">100 Iterations</button>
+        <button onclick="runPerformanceTest(1000)">1000 Iterations</button>
+      </div>
+      <table class="performance-table" id="performanceTable" style="display: none;">
+        <thead>
+          <tr>
+            <th>Operation</th>
+            <th>Iterations</th>
+            <th>Total Time (ms)</th>
+            <th>Avg Time (ms)</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="performanceBody"></tbody>
+      </table>
+    </div>
+
+    <!-- Memory Stats -->
+    <div class="test-section">
+      <h2>💾 Memory & Performance Statistics</h2>
+      <div class="memory-stats">
+        <div class="memory-item">
+          <div class="memory-item-label">WASM Binary Size</div>
+          <div class="memory-item-value" id="wasmSize">—</div>
+        </div>
+        <div class="memory-item">
+          <div class="memory-item-label">JS Used Memory</div>
+          <div class="memory-item-value" id="jsMemory">—</div>
+        </div>
+        <div class="memory-item">
+          <div class="memory-item-label">FPS (if applicable)</div>
+          <div class="memory-item-value" id="fps">—</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let wasmModule = null;
+    let simulator = null;
+    let wasmLoaded = false;
+
+    // Initialize WASM module on page load
+    async function initWasm() {
+      try {
+        console.log('🔄 Loading WASM module from /tupan_core.wasm...');
+        const response = await fetch('/tupan_core.wasm');
+
+        if (!response.ok) {
+          throw new Error(
+            `Failed to fetch WASM: ${response.status} ${response.statusText}`
+          );
+        }
+
+        const buffer = await response.arrayBuffer();
+        const wasmModuleInstance = await WebAssembly.instantiate(buffer);
+        wasmModule = wasmModuleInstance.instance.exports;
+        simulator = new wasmModule.WasmManufacturingSimulator();
+
+        wasmLoaded = true;
+        console.log('✅ WASM module loaded successfully');
+
+        // Update status
+        document.getElementById('wasmStatus').className = 'status-value success';
+        document.getElementById('wasmStatus').textContent = '✅ Loaded';
+
+        // Get module version
+        const version = simulator.version();
+        document.getElementById('moduleVersion').textContent = version;
+
+        // Get materials
+        const materials = JSON.parse(wasmModule.get_supported_materials());
+        document.getElementById('supportedMaterials').textContent = materials.length + ' materials';
+
+        const toolMaterials = JSON.parse(wasmModule.get_tool_materials());
+        document.getElementById('toolMaterials').textContent = toolMaterials.length + ' types';
+
+        const spindles = JSON.parse(wasmModule.get_spindle_specs());
+        document.getElementById('spindleSpecs').textContent = spindles.length + ' specs';
+
+        // Get binary size
+        document.getElementById('wasmSize').textContent = (buffer.byteLength / 1024).toFixed(1) + ' KB';
+
+        // Get JS memory if available
+        if (performance.memory) {
+          const memMB = (performance.memory.usedJSHeapSize / 1048576).toFixed(2);
+          document.getElementById('jsMemory').textContent = memMB + ' MB';
+        }
+      } catch (error) {
+        console.error('❌ Failed to load WASM:', error);
+        document.getElementById('wasmStatus').className = 'status-value error';
+        document.getElementById('wasmStatus').textContent = '❌ Failed: ' + error.message;
+      }
+    }
+
+    function calculateCuttingForces() {
+      if (!wasmLoaded) {
+        showResult('cuttingResult', 'WASM not loaded', true);
+        return;
+      }
+
+      try {
+        const request = JSON.stringify({
+          material: document.getElementById('cuttingMaterial').value,
+          feed_per_tooth: parseFloat(document.getElementById('cuttingFeed').value),
+          depth_of_cut: parseFloat(document.getElementById('cuttingDepth').value),
+          cutting_speed: parseFloat(document.getElementById('cuttingSpeed').value),
+          flute_count: parseInt(document.getElementById('fluteCount').value),
+        });
+
+        const start = performance.now();
+        const resultJson = simulator.calculate_cutting_forces(request);
+        const elapsed = performance.now() - start;
+
+        const result = JSON.parse(resultJson);
+        const text = `
+✅ Cutting Forces Calculated (${elapsed.toFixed(2)}ms)
+
+Tangential Force: ${result.force.toFixed(2)} N
+Feed Force: ${result.feed_force.toFixed(2)} N
+Radial Force: ${result.radial_force.toFixed(2)} N
+Cutting Power: ${result.cutting_power.toFixed(2)} W
+        `;
+
+        showResult('cuttingResult', text, false);
+      } catch (error) {
+        showResult('cuttingResult', 'Error: ' + error.message, true);
+      }
+    }
+
+    function calculateSpindleLoad() {
+      if (!wasmLoaded) {
+        showResult('spindleResult', 'WASM not loaded', true);
+        return;
+      }
+
+      try {
+        const request = JSON.stringify({
+          cutting_power: parseFloat(document.getElementById('spinndlePower').value),
+          spindle_spec: document.getElementById('spindleSpec').value,
+          spindle_speed: parseFloat(document.getElementById('spindleSpeed').value),
+        });
+
+        const start = performance.now();
+        const resultJson = simulator.calculate_spindle_load(request);
+        const elapsed = performance.now() - start;
+
+        const result = JSON.parse(resultJson);
+        const text = `
+✅ Spindle Load Calculated (${elapsed.toFixed(2)}ms)
+
+Load Percentage: ${result.load_percentage.toFixed(1)}%
+Torque: ${result.torque.toFixed(2)} Nm
+Power Margin: ${result.power_margin.toFixed(0)} W
+Thermal Load: ${result.thermal_load.toFixed(1)}°C
+Risk Status: ${result.risk_status}
+Within Limits: ${result.is_within_limits ? 'Yes' : 'No'}
+        `;
+
+        showResult('spindleResult', text, false);
+      } catch (error) {
+        showResult('spindleResult', 'Error: ' + error.message, true);
+      }
+    }
+
+    function analyzeThermal() {
+      if (!wasmLoaded) {
+        showResult('thermalResult', 'WASM not loaded', true);
+        return;
+      }
+
+      try {
+        const request = JSON.stringify({
+          workpiece_material: document.getElementById('thermalWorkpiece').value,
+          tool_material: document.getElementById('thermalTool').value,
+          cutting_power: parseFloat(document.getElementById('thermalPower').value),
+          chip_area: parseFloat(document.getElementById('chipArea').value),
+          cutting_time_sec: parseFloat(document.getElementById('cuttingTime').value),
+          ambient_temp: parseFloat(document.getElementById('ambientTemp').value),
+          coolant_available: document.getElementById('coolantAvailable').value === 'true',
+        });
+
+        const start = performance.now();
+        const resultJson = simulator.analyze_thermal(request);
+        const elapsed = performance.now() - start;
+
+        const result = JSON.parse(resultJson);
+        const text = `
+✅ Thermal Analysis Complete (${elapsed.toFixed(2)}ms)
+
+Chip Temperature: ${result.chip_temperature.toFixed(1)}°C
+Tool Temperature: ${result.tool_temperature.toFixed(1)}°C
+Workpiece Temperature: ${result.workpiece_temperature.toFixed(1)}°C
+Tool Life Ratio: ${(result.tool_life_ratio * 100).toFixed(1)}%
+Heat Generated: ${result.heat_generated.toFixed(0)} W
+Thermal Risk: ${result.thermal_risk}
+        `;
+
+        showResult('thermalResult', text, false);
+      } catch (error) {
+        showResult('thermalResult', 'Error: ' + error.message, true);
+      }
+    }
+
+    async function runPerformanceTest(iterations) {
+      if (!wasmLoaded) {
+        alert('WASM not loaded');
+        return;
+      }
+
+      document.getElementById('performanceTable').style.display = 'table';
+      const tbody = document.getElementById('performanceBody');
+      tbody.innerHTML = '';
+
+      const request = JSON.stringify({
+        material: 'Steel',
+        feed_per_tooth: 0.1,
+        depth_of_cut: 2.0,
+        cutting_speed: 150,
+        flute_count: 2,
+      });
+
+      // Test 1: Cutting Forces
+      let start = performance.now();
+      for (let i = 0; i < iterations; i++) {
+        simulator.calculate_cutting_forces(request);
+      }
+      let elapsed = performance.now() - start;
+      addPerformanceRow('Cutting Forces', iterations, elapsed);
+
+      // Test 2: Spindle Load
+      const request2 = JSON.stringify({
+        cutting_power: 1000,
+        spindle_spec: 'generic_3hp',
+        spindle_speed: 3000,
+      });
+      start = performance.now();
+      for (let i = 0; i < iterations; i++) {
+        simulator.calculate_spindle_load(request2);
+      }
+      elapsed = performance.now() - start;
+      addPerformanceRow('Spindle Load', iterations, elapsed);
+
+      // Test 3: Thermal Analysis
+      const request3 = JSON.stringify({
+        workpiece_material: 'Steel',
+        tool_material: 'Carbide',
+        cutting_power: 1000,
+        chip_area: 10.0,
+        cutting_time_sec: 60,
+        ambient_temp: 25,
+        coolant_available: true,
+      });
+      start = performance.now();
+      for (let i = 0; i < iterations; i++) {
+        simulator.analyze_thermal(request3);
+      }
+      elapsed = performance.now() - start;
+      addPerformanceRow('Thermal Analysis', iterations, elapsed);
+    }
+
+    function addPerformanceRow(operation, iterations, totalTime) {
+      const tbody = document.getElementById('performanceBody');
+      const row = tbody.insertRow();
+      const avgTime = totalTime / iterations;
+      const status = avgTime < 10 ? '✅ PASS' : '⚠️ SLOW';
+
+      row.innerHTML = `
+        <td>${operation}</td>
+        <td>${iterations}</td>
+        <td>${totalTime.toFixed(2)}</td>
+        <td>${avgTime.toFixed(3)}</td>
+        <td>${status}</td>
+      `;
+    }
+
+    function showResult(elementId, text, isError) {
+      const el = document.getElementById(elementId);
+      el.textContent = text;
+      el.className = `result-box ${isError ? 'error' : 'success'}`;
+      el.style.display = 'block';
+    }
+
+    // Initialize on page load
+    window.addEventListener('load', initWasm);
+  </script>
+</body>
+</html>

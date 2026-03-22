@@ -3,8 +3,14 @@
   "version": "0.1.0",
   "description": "TypeScript core for Tupan with WASM bridge",
   "type": "module",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "exports": {
+    ".": {
+      "import": "./src/index.ts",
+      "types": "./src/index.ts"
+    }
+  },
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
@@ -13,7 +19,8 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "tupan-core": "workspace:*"
+    "@tupan/core-rust": "file:../core-rust",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",

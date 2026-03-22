@@ -1,0 +1,217 @@
+/**
+ * Simulation Overlay Styles
+ *
+ * Displays voltage, current, and power on schematic
+ */
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 50;
+}
+
+/* Voltage label */
+.voltageLabel {
+  position: absolute;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 11px;
+  font-weight: 600;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  white-space: nowrap;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  animation: fadeIn 0.2s ease;
+}
+
+.voltageLabel:hover {
+  opacity: 1 !important;
+  z-index: 100;
+}
+
+/* Current label */
+.currentLabel {
+  position: absolute;
+  padding: 2px 4px;
+  background: rgba(0, 100, 200, 0.8);
+  border-radius: 2px;
+  font-size: 10px;
+  font-weight: 500;
+  color: white;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+  white-space: nowrap;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.2s ease;
+}
+
+.currentLabel:hover {
+  opacity: 1 !important;
+  z-index: 100;
+}
+
+/* Power dissipation indicator */
+.powerIndicator {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 6px rgba(255, 100, 100, 0.5) inset;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 0 6px rgba(255, 100, 100, 0.5) inset;
+    filter: brightness(1);
+  }
+  50% {
+    box-shadow: 0 0 10px rgba(255, 100, 100, 0.7) inset;
+    filter: brightness(1.1);
+  }
+}
+
+/* Statistics panel */
+.statsPanel {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 12px;
+  min-width: 200px;
+  max-width: 300px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  font-size: 12px;
+  color: #333;
+  z-index: 100;
+  animation: slideIn 0.3s ease;
+}
+
+.statsPanel h3 {
+  margin: 0 0 8px 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: #2196f3;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 4px;
+}
+
+.statsGroup {
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.statsGroup:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.statItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3px 0;
+}
+
+.statItem .label {
+  font-weight: 600;
+  color: #666;
+}
+
+.statItem .value {
+  font-weight: 600;
+  color: #2196f3;
+  font-family: 'Courier New', monospace;
+  text-align: right;
+  min-width: 70px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  .statsPanel {
+    background: rgba(30, 30, 30, 0.95);
+    border-color: #444;
+    color: #ccc;
+  }
+
+  .statsPanel h3 {
+    color: #64b5f6;
+    border-color: #444;
+  }
+
+  .statsGroup {
+    border-color: #333;
+  }
+
+  .statItem .label {
+    color: #999;
+  }
+
+  .statItem .value {
+    color: #64b5f6;
+  }
+}
+
+/* Mobile optimization */
+@media (max-width: 768px) {
+  .statsPanel {
+    right: 8px;
+    bottom: 8px;
+    min-width: 180px;
+    padding: 10px;
+    font-size: 11px;
+  }
+
+  .statsPanel h3 {
+    font-size: 12px;
+    margin-bottom: 6px;
+  }
+
+  .voltageLabel,
+  .currentLabel {
+    font-size: 9px;
+  }
+}
+
+/* Print styles */
+@media print {
+  .overlay,
+  .statsPanel {
+    display: none;
+  }
+}

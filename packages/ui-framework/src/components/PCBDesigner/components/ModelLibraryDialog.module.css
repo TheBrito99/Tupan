@@ -1,0 +1,528 @@
+/**
+ * Model Library Dialog Styles
+ * Phase 16: 3D Component Models
+ *
+ * Professional modal for managing 3D model library with search,
+ * filter, preview, and assignment capabilities.
+ */
+
+/* Overlay and Dialog Container */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+}
+
+.dialog {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  width: 90%;
+  max-width: 900px;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Header */
+.header {
+  padding: 20px 24px;
+  border-bottom: 1px solid #e5e5e5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.header h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: #999;
+  cursor: pointer;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.closeButton:hover {
+  background: #f5f5f5;
+  color: #333;
+}
+
+/* Content Area */
+.content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Toolbar */
+.toolbar {
+  padding: 16px 24px;
+  border-bottom: 1px solid #e5e5e5;
+  display: flex;
+  gap: 12px;
+  flex-shrink: 0;
+  background: #fafafa;
+}
+
+.searchInput {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #d0d0d0;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.2s ease;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: #0066cc;
+  box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+}
+
+.filterSelect {
+  padding: 8px 12px;
+  border: 1px solid #d0d0d0;
+  border-radius: 6px;
+  font-size: 14px;
+  background: white;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.filterSelect:focus {
+  outline: none;
+  border-color: #0066cc;
+  box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+}
+
+.clearButton {
+  padding: 8px 16px;
+  background: #f0f0f0;
+  border: 1px solid #d0d0d0;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.clearButton:hover {
+  background: #e8e8e8;
+  border-color: #c0c0c0;
+  color: #333;
+}
+
+.clearButton:active {
+  background: #e0e0e0;
+}
+
+/* Statistics */
+.stats {
+  padding: 12px 24px;
+  background: #f5f5f5;
+  display: flex;
+  gap: 32px;
+  flex-shrink: 0;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.statItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.statLabel {
+  font-size: 13px;
+  font-weight: 500;
+  color: #666;
+}
+
+.statValue {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a1a;
+  font-family: 'Courier New', monospace;
+}
+
+/* Models List */
+.modelsList {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.modelItem {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: white;
+}
+
+.modelItem:hover {
+  border-color: #d0d0d0;
+  background: #fafafa;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.modelItem.selected {
+  border-color: #0066cc;
+  background: #f0f7ff;
+  box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+}
+
+/* Preview Thumbnail */
+.preview {
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
+  background: #f5f5f5;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid #e5e5e5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.previewImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Model Info */
+.modelInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.modelName {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a1a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.modelDetails {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  background: #e8f0ff;
+  color: #0066cc;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.detail {
+  font-size: 12px;
+  color: #666;
+  white-space: nowrap;
+}
+
+.modelDimensions {
+  font-size: 12px;
+  color: #999;
+}
+
+.modelDimensions span {
+  font-family: 'Courier New', monospace;
+  color: #666;
+  font-weight: 500;
+}
+
+/* Delete Button */
+.deleteButton {
+  padding: 6px 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #999;
+  transition: all 0.2s ease;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.deleteButton:hover {
+  background: #ffe8e8;
+  color: #c33;
+}
+
+.deleteButton:active {
+  background: #ffd0d0;
+}
+
+/* Empty and Loading States */
+.loadingState,
+.errorState,
+.emptyState {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+}
+
+.loadingState {
+  flex-direction: column;
+  gap: 12px;
+}
+
+.loadingState::before {
+  content: '';
+  width: 40px;
+  height: 40px;
+  border: 3px solid #e5e5e5;
+  border-top-color: #0066cc;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.errorState {
+  background: #fff5f5;
+  color: #c33;
+}
+
+.emptyState {
+  color: #999;
+}
+
+/* Footer */
+.footer {
+  padding: 16px 24px;
+  border-top: 1px solid #e5e5e5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+  background: #fafafa;
+}
+
+.footerText {
+  font-size: 13px;
+  color: #666;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.assignButton,
+.cancelButton {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.assignButton {
+  background: #0066cc;
+  color: white;
+}
+
+.assignButton:hover:not(:disabled) {
+  background: #0052a3;
+  box-shadow: 0 2px 8px rgba(0, 102, 204, 0.3);
+}
+
+.assignButton:active:not(:disabled) {
+  background: #003d7a;
+}
+
+.assignButton:disabled {
+  background: #ccc;
+  color: #999;
+  cursor: not-allowed;
+}
+
+.cancelButton {
+  background: #f0f0f0;
+  color: #333;
+  border: 1px solid #d0d0d0;
+}
+
+.cancelButton:hover {
+  background: #e8e8e8;
+  border-color: #c0c0c0;
+}
+
+.cancelButton:active {
+  background: #e0e0e0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .dialog {
+    width: 95%;
+    max-height: 90vh;
+  }
+
+  .header {
+    padding: 16px 16px;
+  }
+
+  .header h2 {
+    font-size: 18px;
+  }
+
+  .toolbar {
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px 16px;
+  }
+
+  .stats {
+    padding: 10px 16px;
+    gap: 16px;
+    font-size: 12px;
+  }
+
+  .content {
+    padding: 0 16px;
+  }
+
+  .modelsList {
+    padding: 8px;
+    gap: 6px;
+  }
+
+  .modelItem {
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .preview {
+    width: 50px;
+    height: 50px;
+  }
+
+  .footer {
+    padding: 12px 16px;
+    flex-wrap: wrap;
+  }
+
+  .footerText {
+    width: 100%;
+    margin-bottom: 8px;
+  }
+
+  .buttonGroup {
+    width: 100%;
+  }
+
+  .assignButton,
+  .cancelButton {
+    flex: 1;
+    padding: 10px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dialog {
+    width: 100%;
+    max-height: 95vh;
+    border-radius: 8px 8px 0 0;
+  }
+
+  .stats {
+    flex-direction: column;
+    gap: 8px;
+    padding: 8px 16px;
+  }
+
+  .modelItem {
+    padding: 8px;
+    gap: 8px;
+  }
+
+  .modelDetails {
+    font-size: 11px;
+    gap: 8px;
+  }
+
+  .preview {
+    width: 45px;
+    height: 45px;
+  }
+
+  .badge {
+    font-size: 10px;
+    padding: 2px 6px;
+  }
+}

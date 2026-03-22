@@ -1,22 +1,20 @@
 {
   "name": "@tupan/web-app",
   "version": "0.1.0",
-  "description": "Tupan main web application",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "test": "vitest",
-    "test:watch": "vitest --watch"
+    "test": "vitest"
   },
   "dependencies": {
-    "@tupan/core-ts": "workspace:*",
-    "@tupan/ui-framework": "workspace:*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.20.0",
-    "zustand": "^4.4.0"
+    "zustand": "^4.4.0",
+    "@tupan/ui-framework": "file:../ui-framework",
+    "@tupan/core-ts": "file:../core-ts"
   },
   "devDependencies": {
     "@types/react": "^18.2.0",

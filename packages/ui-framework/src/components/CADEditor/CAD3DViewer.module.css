@@ -1,0 +1,197 @@
+/**
+ * CAD 3D Viewer Styles
+ * Phase 17.4: 3D Visualization
+ */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* Toolbar */
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 16px;
+  background: #f5f5f5;
+  border-bottom: 1px solid #e0e0e0;
+  flex-wrap: wrap;
+}
+
+.toolGroup {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #666666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.toolButton {
+  padding: 8px 12px;
+  background: #ffffff;
+  color: #333333;
+  border: 1px solid #d0d0d0;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.toolButton:hover {
+  background: #e8e8e8;
+  border-color: #999999;
+}
+
+.toolButton.active {
+  background: #0066cc;
+  color: #ffffff;
+  border-color: #0052a3;
+}
+
+.select {
+  padding: 6px 10px;
+  background: #ffffff;
+  color: #333333;
+  border: 1px solid #d0d0d0;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.select:hover {
+  border-color: #999999;
+}
+
+.select:focus {
+  outline: none;
+  border-color: #0066cc;
+  box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+}
+
+/* Canvas container */
+.canvasContainer {
+  flex: 1;
+  position: relative;
+  background: #f5f5f5;
+  overflow: hidden;
+}
+
+.canvasContainer canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Status bar */
+.statusBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+  background: #f9f9f9;
+  border-top: 1px solid #e0e0e0;
+  font-size: 12px;
+  color: #666666;
+}
+
+.statusText {
+  font-family: 'Monaco', 'Menlo', monospace;
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  .container {
+    background: #1e1e1e;
+    color: #e5e5e5;
+  }
+
+  .toolbar {
+    background: #2a2a2a;
+    border-bottom-color: #333333;
+  }
+
+  .label {
+    color: #8b949e;
+  }
+
+  .toolButton {
+    background: #3a3a3a;
+    color: #e5e5e5;
+    border-color: #444444;
+  }
+
+  .toolButton:hover {
+    background: #454545;
+    border-color: #666666;
+  }
+
+  .toolButton.active {
+    background: #0066cc;
+    color: #ffffff;
+    border-color: #0052a3;
+  }
+
+  .select {
+    background: #3a3a3a;
+    color: #e5e5e5;
+    border-color: #444444;
+  }
+
+  .select:hover {
+    border-color: #666666;
+  }
+
+  .select:focus {
+    border-color: #0066cc;
+    box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+  }
+
+  .canvasContainer {
+    background: #2a2a2a;
+  }
+
+  .statusBar {
+    background: #252525;
+    border-top-color: #333333;
+    color: #8b949e;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .toolbar {
+    gap: 8px;
+    padding: 8px 12px;
+  }
+
+  .toolButton {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  .label {
+    display: none;
+  }
+
+  .statusBar {
+    flex-direction: column;
+    gap: 4px;
+    padding: 6px 12px;
+    font-size: 11px;
+  }
+}

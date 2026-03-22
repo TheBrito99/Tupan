@@ -1,30 +1,31 @@
 {
   "name": "tupan",
   "version": "0.1.0",
-  "description": "Comprehensive mechatronics engineering platform",
+  "description": "Comprehensive mechatronics engineering platform with multi-domain simulators",
+  "private": true,
   "type": "module",
-  "engines": {
-    "node": ">=18.0.0",
-    "pnpm": ">=8.0.0"
-  },
+  "packageManager": "pnpm@8.0.0",
   "scripts": {
-    "build": "pnpm build:wasm && turbo build",
-    "build:wasm:windows": ".\\build-wasm.cmd",
-    "build:wasm:unix": "bash ./build-wasm.sh",
-    "dev": "turbo dev --parallel",
-    "test": "turbo test",
-    "test:watch": "turbo test:watch",
-    "lint": "turbo lint",
-    "format": "turbo format",
-    "docs:generate": "node tools/doc-generator/dist/index.js",
-    "docs:generate:watch": "nodemon --exec npm run docs:generate"
+    "build": "pnpm -r build",
+    "test": "pnpm -r test",
+    "dev": "pnpm -r dev",
+    "wasm:build": "cd packages/core-rust && wasm-pack build --target web --release",
+    "wasm:dev": "cd packages/core-rust && wasm-pack build --target web",
+    "wasm:clean": "rm -rf packages/core-rust/pkg",
+    "tauri": "cargo tauri",
+    "tauri:dev": "cargo tauri dev",
+    "tauri:build": "pnpm wasm:build && cargo tauri build"
   },
-  "workspaces": [
-    "packages/*",
-    "tools/*"
-  ],
   "devDependencies": {
-    "turbo": "^2.0.0",
-    "nodemon": "^3.0.0"
+    "@types/node": "^20.0.0",
+    "typescript": "^5.3.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "typescript": "^5.3.0"
+    }
+  },
+  "dependencies": {
+    "uuid": "^9.0.0"
   }
 }

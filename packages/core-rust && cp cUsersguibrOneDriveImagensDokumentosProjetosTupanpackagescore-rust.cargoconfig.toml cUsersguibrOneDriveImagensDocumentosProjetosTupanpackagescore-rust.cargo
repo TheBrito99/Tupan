@@ -1,0 +1,27 @@
+[package]
+name = "tupan-core"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+uuid = { version = "1.0", features = ["v4", "serde"] }
+thiserror = "1.0"
+nalgebra = "0.33"
+
+[dependencies.wasm-bindgen]
+version = "0.2"
+optional = true
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+uuid = { version = "1.0", features = ["v4", "serde", "js"] }
+
+[features]
+default = []
+wasm = ["wasm-bindgen"]
+
+[dev-dependencies]

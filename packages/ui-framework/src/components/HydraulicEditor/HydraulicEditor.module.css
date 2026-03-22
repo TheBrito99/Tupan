@@ -1,0 +1,473 @@
+/* Hydraulic Editor Layout */
+.hydraulicEditor {
+  display: grid;
+  grid-template-columns: 200px 1fr 280px 300px;
+  grid-template-rows: auto 1fr;
+  height: 100vh;
+  gap: 0;
+  background-color: #f5f5f5;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+}
+
+/* Toolbar */
+.toolbar {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background-color: #2c3e50;
+  border-bottom: 1px solid #34495e;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.toolbar button {
+  padding: 6px 12px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.toolbar button:hover {
+  background-color: #2980b9;
+}
+
+.toolbar button.active {
+  background-color: #27ae60;
+}
+
+.toolbar button:active {
+  transform: translateY(1px);
+}
+
+.toolbar .analyzeButton {
+  background-color: #e74c3c;
+  margin-left: auto;
+}
+
+.toolbar .analyzeButton:hover {
+  background-color: #c0392b;
+}
+
+.toolbar .zoom {
+  color: #ecf0f1;
+  font-size: 13px;
+  font-weight: 500;
+  margin-left: 12px;
+  padding: 0 8px;
+}
+
+/* Component Palette */
+.palette {
+  grid-row: 2;
+  grid-column: 1;
+  background-color: #ffffff;
+  border-right: 1px solid #ddd;
+  overflow-y: auto;
+  padding: 12px;
+}
+
+.palette h3 {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #2c3e50;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.paletteGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.paletteButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-left: 3px solid #3498db;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 12px;
+  font-weight: 500;
+  color: #2c3e50;
+}
+
+.paletteButton:hover {
+  background-color: #e8f4f8;
+  border-left-color: #2980b9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.paletteIcon {
+  width: 16px;
+  height: 16px;
+  border-radius: 2px;
+}
+
+.paletteInfo {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #ddd;
+}
+
+.paletteInfo h4 {
+  margin: 0 0 8px 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: #2c3e50;
+  text-transform: uppercase;
+}
+
+.paletteInfo ul {
+  margin: 0;
+  padding: 0 0 0 16px;
+  font-size: 11px;
+  color: #555;
+  line-height: 1.6;
+}
+
+.paletteInfo li {
+  margin: 4px 0;
+}
+
+.paletteInfo strong {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+/* Canvas */
+.canvas {
+  grid-row: 2;
+  grid-column: 2;
+  background-color: #ffffff;
+  border-right: 1px solid #ddd;
+  border-left: 1px solid #ddd;
+  overflow: hidden;
+  position: relative;
+}
+
+.canvas svg {
+  width: 100%;
+  height: 100%;
+  cursor: move;
+}
+
+/* Property Panel */
+.propertyPanel {
+  grid-row: 2;
+  grid-column: 3;
+  background-color: #ffffff;
+  border-right: 1px solid #ddd;
+  border-left: 1px solid #ddd;
+  overflow-y: auto;
+  padding: 12px;
+}
+
+.propertyPanel h3 {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #2c3e50;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.placeholder {
+  color: #999;
+  font-size: 12px;
+  text-align: center;
+  padding: 20px 0;
+}
+
+.propertySection {
+  margin-bottom: 12px;
+  padding: 8px;
+  background-color: #f8f9fa;
+  border-radius: 3px;
+}
+
+.propertySection h4 {
+  margin: 0 0 8px 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: #2c3e50;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.propertyField {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.propertyField label {
+  font-size: 11px;
+  font-weight: 500;
+  color: #555;
+}
+
+.propertyField input {
+  padding: 6px 8px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  font-size: 12px;
+  transition: border-color 0.2s;
+}
+
+.propertyField input:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 4px rgba(52, 152, 219, 0.2);
+}
+
+.deleteButton {
+  margin-top: 12px;
+  padding: 8px 12px;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.deleteButton:hover {
+  background-color: #c0392b;
+}
+
+/* Analysis Panel */
+.analysisPanel {
+  grid-row: 2;
+  grid-column: 4;
+  background-color: #ffffff;
+  border-left: 1px solid #ddd;
+  overflow-y: auto;
+  padding: 12px;
+}
+
+.analysisPanel h3 {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #2c3e50;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.analysisHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #eee;
+}
+
+.analysisHeader h3 {
+  margin: 0;
+  flex: 1;
+}
+
+.analyzeButton {
+  padding: 6px 12px;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.analyzeButton:hover {
+  background-color: #c0392b;
+}
+
+.analyzeButton:active {
+  transform: translateY(1px);
+}
+
+.analysisSectionGroup {
+  margin-bottom: 12px;
+}
+
+.analysisSectionGroup h4 {
+  margin: 0 0 8px 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: #2c3e50;
+  text-transform: uppercase;
+}
+
+.resultsTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+}
+
+.resultsTable th {
+  background-color: #f0f0f0;
+  padding: 6px 4px;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 1px solid #ddd;
+  color: #2c3e50;
+}
+
+.resultsTable td {
+  padding: 4px;
+  border-bottom: 1px solid #eee;
+}
+
+.resultsTable .value {
+  text-align: right;
+  font-family: 'Courier New', monospace;
+  font-weight: 500;
+  color: #2c3e50;
+}
+
+.exportButtons {
+  display: flex;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.exportButton {
+  flex: 1;
+  padding: 6px 8px;
+  background-color: #27ae60;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.exportButton:hover {
+  background-color: #229954;
+}
+
+/* Error Panel */
+.errorPanel {
+  grid-column: 1 / -1;
+  background-color: #fadbd8;
+  border-bottom: 1px solid #e74c3c;
+  padding: 8px 12px;
+  color: #c0392b;
+  font-size: 12px;
+}
+
+.errorPanel strong {
+  font-weight: 600;
+}
+
+.errorPanel ul {
+  margin: 4px 0 0 0;
+  padding: 0 0 0 20px;
+}
+
+.errorPanel li {
+  margin: 2px 0;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .hydraulicEditor {
+    grid-template-columns: 180px 1fr 250px;
+  }
+
+  .analysisPanel {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    max-height: 250px;
+    border-left: none;
+    border-top: 1px solid #ddd;
+  }
+
+  .errorPanel {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 800px) {
+  .hydraulicEditor {
+    grid-template-columns: 150px 1fr;
+  }
+
+  .propertyPanel {
+    display: none;
+  }
+
+  .palette {
+    padding: 8px;
+  }
+
+  .paletteButton {
+    padding: 6px;
+    font-size: 11px;
+  }
+
+  .paletteInfo {
+    display: none;
+  }
+}
+
+/* Scrollbar Styling */
+.palette::-webkit-scrollbar,
+.propertyPanel::-webkit-scrollbar,
+.analysisPanel::-webkit-scrollbar {
+  width: 8px;
+}
+
+.palette::-webkit-scrollbar-track,
+.propertyPanel::-webkit-scrollbar-track,
+.analysisPanel::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.palette::-webkit-scrollbar-thumb,
+.propertyPanel::-webkit-scrollbar-thumb,
+.analysisPanel::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.palette::-webkit-scrollbar-thumb:hover,
+.propertyPanel::-webkit-scrollbar-thumb:hover,
+.analysisPanel::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Print Styles */
+@media print {
+  .toolbar,
+  .palette,
+  .propertyPanel {
+    display: none;
+  }
+
+  .analysisPanel {
+    grid-column: 1 / -1;
+  }
+}

@@ -1,0 +1,592 @@
+/**
+ * Block Diagram Editor Styles
+ *
+ * Provides styling for the visual firmware design tool including:
+ * - Block palette
+ * - Canvas with block and wire rendering
+ * - Property panel with parameter editing
+ * - Code preview
+ */
+
+/* ========== Main Editor Layout ========== */
+
+.editor {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #fafafa;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ========== Toolbar ========== */
+
+.toolbar {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  padding: 12px 16px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e0e0e0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  flex-wrap: wrap;
+}
+
+.toolbarSection {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.toolbarSection label {
+  font-weight: 500;
+  color: #333;
+  font-size: 14px;
+}
+
+.projectNameInput,
+.selectInput {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 13px;
+  background-color: white;
+  min-width: 150px;
+}
+
+.projectNameInput:focus,
+.selectInput:focus {
+  outline: none;
+  border-color: #2196f3;
+  box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.1);
+}
+
+.compileButton,
+.exportButton {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 13px;
+}
+
+.compileButton {
+  background-color: #4caf50;
+  color: white;
+}
+
+.compileButton:hover {
+  background-color: #45a049;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.exportButton {
+  background-color: #2196f3;
+  color: white;
+}
+
+.exportButton:hover:not(:disabled) {
+  background-color: #1976d2;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.exportButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.toolbarStats {
+  display: flex;
+  gap: 16px;
+  margin-left: auto;
+  color: #666;
+  font-size: 13px;
+}
+
+.toolbarStats span {
+  display: flex;
+  align-items: center;
+}
+
+/* ========== Main Editor Layout ========== */
+
+.editorLayout {
+  display: flex;
+  flex: 1;
+  gap: 0;
+  overflow: hidden;
+}
+
+/* ========== Block Palette ========== */
+
+.palette {
+  width: 200px;
+  background-color: #ffffff;
+  border-right: 1px solid #e0e0e0;
+  overflow-y: auto;
+  padding: 12px;
+}
+
+.palette h3 {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  padding: 8px 0;
+}
+
+.category {
+  margin-bottom: 16px;
+}
+
+.category h4 {
+  margin: 0 0 8px 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.blocks {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.paletteBlock {
+  padding: 8px;
+  border-radius: 4px;
+  cursor: grab;
+  transition: all 0.2s ease;
+  border: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  user-select: none;
+  font-size: 12px;
+}
+
+.paletteBlock:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  border-color: #999;
+}
+
+.paletteBlock:active {
+  cursor: grabbing;
+}
+
+.blockIcon {
+  font-size: 20px;
+}
+
+.blockLabel {
+  font-size: 11px;
+  font-weight: 500;
+  text-align: center;
+  color: #333;
+}
+
+/* ========== Canvas ========== */
+
+.canvasContainer {
+  flex: 1;
+  background: linear-gradient(45deg, #f5f5f5 25%, transparent 25%),
+    linear-gradient(-45deg, #f5f5f5 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #f5f5f5 75%),
+    linear-gradient(-45deg, transparent 75%, #f5f5f5 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+  background-color: #ffffff;
+  border-right: 1px solid #e0e0e0;
+  overflow: hidden;
+  position: relative;
+}
+
+.canvas {
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  cursor: default;
+}
+
+.canvas:active {
+  cursor: default;
+}
+
+.blockTitle {
+  font-size: 18px;
+  font-weight: bold;
+  pointer-events: none;
+  user-select: none;
+}
+
+.blockName {
+  font-size: 11px;
+  font-weight: 500;
+  color: #333;
+  pointer-events: none;
+  user-select: none;
+  word-wrap: break-word;
+}
+
+/* ========== Right Panel ========== */
+
+.rightPanel {
+  width: 300px;
+  background-color: #ffffff;
+  border-left: 1px solid #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+/* ========== Properties Panel ========== */
+
+.properties {
+  padding: 12px;
+  border-bottom: 1px solid #e0e0e0;
+  flex: 1;
+  overflow-y: auto;
+  min-height: 200px;
+}
+
+.propertyHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.propertyHeader h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.deleteButton {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 4px 8px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.2s ease;
+}
+
+.deleteButton:hover {
+  background-color: #d32f2f;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.propertySection {
+  margin-bottom: 12px;
+}
+
+.propertySection label {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #555;
+}
+
+.propertyInput {
+  width: 100%;
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 12px;
+  box-sizing: border-box;
+}
+
+.propertyInput:focus {
+  outline: none;
+  border-color: #2196f3;
+  box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.1);
+}
+
+.selectInput {
+  width: 100%;
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 12px;
+  box-sizing: border-box;
+  background-color: white;
+  cursor: pointer;
+}
+
+.selectInput:focus {
+  outline: none;
+  border-color: #2196f3;
+  box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.1);
+}
+
+.numberInputContainer {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.rangeInput {
+  flex: 1;
+  height: 6px;
+  -webkit-appearance: none;
+  width: 100%;
+  background: #e0e0e0;
+  outline: none;
+  border-radius: 3px;
+}
+
+.rangeInput::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  background: #2196f3;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background 0.2s ease;
+}
+
+.rangeInput::-webkit-slider-thumb:hover {
+  background: #1976d2;
+}
+
+.rangeInput::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  background: #2196f3;
+  cursor: pointer;
+  border: none;
+  border-radius: 50%;
+  transition: background 0.2s ease;
+}
+
+.rangeInput::-moz-range-thumb:hover {
+  background: #1976d2;
+}
+
+.portInfo {
+  padding: 8px;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  margin-bottom: 12px;
+  font-size: 12px;
+}
+
+.portDetail {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.portDetail:last-child {
+  margin-bottom: 0;
+}
+
+.portLabel {
+  font-weight: 500;
+  margin-right: 8px;
+}
+
+.parametersSection {
+  margin-top: 12px;
+}
+
+.parametersSection h4 {
+  margin: 0 0 8px 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.noParameters {
+  margin: 0;
+  font-size: 12px;
+  color: #999;
+  font-style: italic;
+}
+
+/* ========== Edge Panel ========== */
+
+.edgePanel {
+  padding: 12px;
+  background-color: #fff9c4;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.edgePanel h4 {
+  margin: 0 0 8px 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: #333;
+}
+
+.edgePanel .deleteButton {
+  width: 100%;
+}
+
+/* ========== Code Preview ========== */
+
+.codePreview {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid #e0e0e0;
+  overflow: hidden;
+}
+
+.tabs {
+  display: flex;
+  border-bottom: 1px solid #e0e0e0;
+  background-color: #fafafa;
+}
+
+.tabs button {
+  flex: 1;
+  padding: 8px 12px;
+  border: none;
+  background-color: transparent;
+  font-size: 12px;
+  font-weight: 500;
+  color: #666;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.tabs button:hover {
+  color: #333;
+  background-color: #f0f0f0;
+}
+
+.tabs button.activeTab {
+  color: #2196f3;
+  border-bottom-color: #2196f3;
+  background-color: white;
+}
+
+.codeContent {
+  flex: 1;
+  padding: 12px;
+  margin: 0;
+  background-color: #1e1e1e;
+  color: #d4d4d4;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 11px;
+  line-height: 1.5;
+  overflow: auto;
+  border: none;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.errorMessage {
+  padding: 12px;
+  background-color: #ffebee;
+  color: #c62828;
+  font-size: 12px;
+}
+
+.errorMessage strong {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.errorMessage pre {
+  margin: 0;
+  overflow: auto;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 11px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* ========== Scrollbar Styling ========== */
+
+.palette::-webkit-scrollbar,
+.properties::-webkit-scrollbar,
+.rightPanel::-webkit-scrollbar,
+.codeContent::-webkit-scrollbar {
+  width: 8px;
+}
+
+.palette::-webkit-scrollbar-track,
+.properties::-webkit-scrollbar-track,
+.rightPanel::-webkit-scrollbar-track,
+.codeContent::-webkit-scrollbar-track {
+  background: #f0f0f0;
+}
+
+.palette::-webkit-scrollbar-thumb,
+.properties::-webkit-scrollbar-thumb,
+.rightPanel::-webkit-scrollbar-thumb,
+.codeContent::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+
+.palette::-webkit-scrollbar-thumb:hover,
+.properties::-webkit-scrollbar-thumb:hover,
+.rightPanel::-webkit-scrollbar-thumb:hover,
+.codeContent::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+
+/* ========== Responsive Design ========== */
+
+@media (max-width: 1200px) {
+  .rightPanel {
+    width: 250px;
+  }
+}
+
+@media (max-width: 900px) {
+  .palette {
+    width: 180px;
+  }
+
+  .rightPanel {
+    width: 200px;
+  }
+}
+
+@media (max-width: 600px) {
+  .editorLayout {
+    flex-direction: column;
+  }
+
+  .palette,
+  .rightPanel {
+    width: 100%;
+    height: auto;
+    max-height: 30vh;
+    border: none;
+  }
+
+  .palette {
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .canvasContainer {
+    border: none;
+    border-bottom: 1px solid #e0e0e0;
+  }
+}

@@ -1,0 +1,72 @@
+.latex-page {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 64px);
+  background: linear-gradient(180deg, #efe7db 0%, #e3d7c7 100%);
+}
+
+.latex-page__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 22px 26px;
+  border-bottom: 1px solid rgba(33, 37, 41, 0.08);
+  background: rgba(255, 252, 247, 0.86);
+  backdrop-filter: blur(12px);
+}
+
+.latex-page__header h1 {
+  font-size: 30px;
+  line-height: 1.1;
+  color: #202529;
+}
+
+.latex-page__header p {
+  margin-top: 8px;
+  max-width: 62ch;
+  font-size: 14px;
+  color: #5c6368;
+}
+
+.latex-page__phase-note {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  min-width: 140px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(181, 93, 61, 0.08);
+  color: #743626;
+}
+
+.latex-page__phase-note span {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.latex-page__phase-note strong {
+  font-size: 15px;
+}
+
+.latex-page__body {
+  flex: 1;
+  min-height: 0;
+}
+
+.latex-page__body > * {
+  height: 100%;
+}
+
+@media (max-width: 768px) {
+  .latex-page__header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .latex-page__phase-note {
+    align-items: flex-start;
+  }
+}

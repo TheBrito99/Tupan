@@ -22,7 +22,7 @@ pub mod graph;
 pub mod port;
 
 // Re-export main types
-pub use node::{Node, NodeId, NodeData};
+pub use node::{Node, NodeId, NodeData, ComputeContext};
 pub use edge::{Edge, EdgeId};
 pub use port::{Port, PortId, PortDirection, PortType};
 pub use graph::Graph;

@@ -24,6 +24,9 @@ pub mod pwm;
 pub mod codegen;
 pub mod circuit_interface;
 pub mod coupled_simulator;
+pub mod examples;
+pub mod wasm_bindings;
+pub mod board_templates;
 
 pub use cpu::ArmCpuEmulator;
 pub use instruction::{Instruction, InstructionSet, ArmThumb2};
@@ -35,12 +38,26 @@ pub use timer::{SysTick, GpTimer, TimerMode};
 pub use gpio::{GpioPin, GpioPort, PinMode, PullMode};
 pub use adc::{Adc, AdcChannel, AdcResolution, ConversionMode};
 pub use pwm::{PwmTimer, PwmChannel, PwmMode};
-pub use codegen::{FirmwareCode, CodeGenerator, McuTarget};
+pub use codegen::{FirmwareCode, CodeGenerator};
 pub use circuit_interface::{
     MicrocontrollerCircuitInterface, CircuitNodeId, CircuitElementId,
     GpioMapping, AdcMapping,
 };
 pub use coupled_simulator::{CoupledMicrocontrollerCircuitSim, SimulationStep};
+
+// WASM bindings exports (Phase 22)
+#[cfg(feature = "wasm")]
+pub use wasm_bindings::{
+    WasmMicrocontrollerSimulator, McuStateJson, CpsrJson, MemoryRegionJson,
+    PeripheralStateJson, GpioPinState, AdcChannelState, PwmState, TimerState,
+};
+
+// Board templates (Phase 22)
+pub use board_templates::{BoardTemplate, McuTarget, AdcConfig, TimerConfig, PinMappings};
+
+// Phase 22 Week 1 Task 4: WASM Testing
+#[cfg(test)]
+mod wasm_tests;
 
 #[cfg(test)]
 mod tests;

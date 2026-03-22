@@ -1,0 +1,29 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Tupan",
+  "version": "0.1.0",
+  "identifier": "com.tupan.app",
+  "build": {
+    "beforeBuildCommand": "",
+    "beforeDevCommand": "",
+    "devUrl": "http://localhost:5173",
+    "frontendDist": "../packages/web-app/dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "Tupan - Mechatronics Engineering Platform",
+        "width": 1400,
+        "height": 900,
+        "url": "/"
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": ["nsis"]
+  }
+}

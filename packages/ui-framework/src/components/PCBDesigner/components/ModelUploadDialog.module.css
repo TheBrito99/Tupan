@@ -1,0 +1,304 @@
+/**
+ * ModelUploadDialog Styles
+ * Phase 16: 3D Component Models
+ */
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.dialog {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  width: 90%;
+  max-height: 90vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  padding: 24px;
+  border-bottom: 1px solid #e5e5e5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: #666;
+  cursor: pointer;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.closeButton:hover:not(:disabled) {
+  background-color: #f0f0f0;
+  color: #1a1a1a;
+}
+
+.closeButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.content {
+  flex: 1;
+  padding: 24px;
+  overflow-y: auto;
+}
+
+.dropZone {
+  border: 2px dashed #ddd;
+  border-radius: 8px;
+  padding: 40px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  background-color: #f9f9f9;
+  margin-bottom: 16px;
+}
+
+.dropZone:hover {
+  border-color: #999;
+  background-color: #f5f5f5;
+}
+
+.dropZone.dragOver {
+  border-color: #0066cc;
+  background-color: #f0f7ff;
+}
+
+.dropZoneContent {
+  pointer-events: none;
+}
+
+.uploadIcon {
+  width: 48px;
+  height: 48px;
+  color: #0066cc;
+  margin-bottom: 12px;
+}
+
+.dropText {
+  margin: 12px 0 4px 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+.dropSubtext {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.pickButton {
+  width: 100%;
+  padding: 12px 16px;
+  background-color: #0066cc;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-bottom: 16px;
+}
+
+.pickButton:hover:not(:disabled) {
+  background-color: #0052a3;
+}
+
+.pickButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.infoBox {
+  background-color: #f9f9f9;
+  border: 1px solid #e5e5e5;
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 16px;
+}
+
+.infoBox h3 {
+  margin: 0 0 8px 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.infoBox ul {
+  margin: 0;
+  padding-left: 20px;
+  font-size: 13px;
+  color: #555;
+}
+
+.infoBox li {
+  margin-bottom: 4px;
+}
+
+.storageInfo {
+  background-color: #f9f9f9;
+  border: 1px solid #e5e5e5;
+  border-radius: 6px;
+  padding: 12px;
+  font-size: 13px;
+  color: #666;
+}
+
+.storageInfo p {
+  margin: 4px 0;
+}
+
+.loadingState {
+  text-align: center;
+}
+
+.fileInfo {
+  margin-bottom: 16px;
+}
+
+.fileName {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1a1a1a;
+  word-break: break-all;
+  margin-bottom: 4px;
+}
+
+.fileSize {
+  font-size: 13px;
+  color: #666;
+}
+
+.progressContainer {
+  width: 100%;
+  height: 8px;
+  background-color: #e5e5e5;
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 16px 0;
+}
+
+.progressBar {
+  height: 100%;
+  background-color: #0066cc;
+  transition: width 0.3s;
+}
+
+.progressText {
+  font-size: 14px;
+  font-weight: 500;
+  color: #0066cc;
+}
+
+.errorBox {
+  background-color: #fee;
+  border: 1px solid #fcc;
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 16px;
+  font-size: 13px;
+  color: #c33;
+}
+
+.errorMessage {
+  color: #c33;
+  font-size: 13px;
+  margin-top: 12px;
+  text-align: center;
+}
+
+.footer {
+  padding: 16px 24px;
+  border-top: 1px solid #e5e5e5;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.cancelButton {
+  padding: 8px 16px;
+  background-color: #f0f0f0;
+  color: #1a1a1a;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cancelButton:hover:not(:disabled) {
+  background-color: #e0e0e0;
+  border-color: #999;
+}
+
+.cancelButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+  .dialog {
+    max-width: 95%;
+  }
+
+  .header {
+    padding: 16px;
+  }
+
+  .content {
+    padding: 16px;
+  }
+
+  .dropZone {
+    padding: 30px 15px;
+  }
+
+  .uploadIcon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .dropText {
+    font-size: 14px;
+  }
+
+  .footer {
+    padding: 12px 16px;
+  }
+}

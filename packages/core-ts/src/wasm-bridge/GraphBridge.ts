@@ -32,7 +32,7 @@ export class GraphBridge {
 
     try {
       // Dynamic import of WASM module
-      const wasmModule = await import('../../lib/wasm/tupan_core');
+      const wasmModule = await import('@tupan/core-rust');
 
       // Create a new WASM graph instance
       this.wasmGraph = new wasmModule.WasmGraph();

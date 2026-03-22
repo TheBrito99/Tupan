@@ -1,0 +1,275 @@
+/**
+ * Three.js PCB Viewer Styles
+ * Phase 16: 3D Component Models
+ */
+
+.container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.canvas {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.placeholder {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 10;
+}
+
+.placeholder p {
+  margin: 0;
+  padding: 8px 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+.subtext {
+  font-size: 12px !important;
+  color: #666 !important;
+  margin-top: 4px !important;
+}
+
+/* Loading Overlay */
+.loadingOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid #e5e5e5;
+  border-top-color: #0066cc;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 16px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loadingOverlay p {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+  font-weight: 500;
+}
+
+/* Error Overlay */
+.errorOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.errorMessage {
+  background: white;
+  border-radius: 8px;
+  padding: 24px;
+  max-width: 400px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.errorMessage strong {
+  display: block;
+  color: #c33;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.errorMessage p {
+  margin: 0;
+  color: #666;
+  font-size: 13px;
+}
+
+/* FPS Counter */
+.fpsCounter {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: 'Courier New', monospace;
+  z-index: 100;
+  min-width: 60px;
+  text-align: right;
+}
+
+.fpsGreen {
+  background: rgba(34, 197, 94, 0.8);
+}
+
+.fpsAmber {
+  background: rgba(251, 146, 60, 0.8);
+}
+
+.fpsRed {
+  background: rgba(239, 68, 68, 0.8);
+}
+
+.triangleCount {
+  font-size: 11px;
+  opacity: 0.8;
+  margin-top: 2px;
+}
+
+/* Settings Panel */
+.settingsPanel {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  background: white;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 12px;
+  max-width: 200px;
+  font-size: 12px;
+  z-index: 100;
+}
+
+.panelTitle {
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.settingItem {
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.settingItem label {
+  color: #666;
+  font-weight: 500;
+}
+
+.settingValue {
+  color: #1a1a1a;
+  font-weight: 600;
+}
+
+/* Info Panel */
+.infoPanel {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  background: white;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 12px;
+  max-width: 180px;
+  font-size: 11px;
+  z-index: 100;
+}
+
+.infoItem {
+  margin-bottom: 6px;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.infoItem label {
+  color: #666;
+  font-weight: 500;
+}
+
+.infoItem div {
+  color: #1a1a1a;
+  font-weight: 600;
+  text-align: right;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .fpsCounter {
+    top: 8px;
+    right: 8px;
+    font-size: 11px;
+    padding: 6px 10px;
+  }
+
+  .settingsPanel {
+    bottom: 8px;
+    right: 8px;
+    max-width: 160px;
+    padding: 10px;
+    font-size: 11px;
+  }
+
+  .infoPanel {
+    bottom: 8px;
+    left: 8px;
+    max-width: 160px;
+    padding: 10px;
+    font-size: 10px;
+  }
+
+  .placeholder p {
+    font-size: 14px;
+  }
+
+  .subtext {
+    font-size: 11px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .settingsPanel {
+    display: none;
+  }
+
+  .infoPanel {
+    max-width: 140px;
+    font-size: 9px;
+  }
+
+  .fpsCounter {
+    font-size: 10px;
+  }
+}

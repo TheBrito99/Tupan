@@ -11,5 +11,6 @@ export { Graph, Node, Port, Edge } from './graph/Graph';
 
 // WASM bridge
 export { GraphBridge } from './wasm-bridge/GraphBridge';
+export { StateMachineBridge, PetriNetBridge, WasmModuleLoader, type SimulationResult, type SimulationState } from './wasm-bridge/index';
 
 export const VERSION = '0.1.0';

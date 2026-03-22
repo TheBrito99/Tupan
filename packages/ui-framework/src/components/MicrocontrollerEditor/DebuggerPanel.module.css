@@ -1,0 +1,643 @@
+/**
+ * Debugger Panel Styles
+ *
+ * Provides styling for the microcontroller simulator debugger including:
+ * - Control buttons and execution stats
+ * - Register inspector with hex/decimal/binary display
+ * - Memory browser with hex dump
+ * - Breakpoint manager
+ */
+
+/* ========== Main Debugger Container ========== */
+
+.debuggerPanel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+}
+
+/* ========== Control Bar ========== */
+
+.controlBar {
+  display: flex;
+  gap: 8px;
+  padding: 12px 16px;
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #e0e0e0;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.controlButtons {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.controlButton {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: white;
+  color: #333;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 60px;
+  justify-content: center;
+}
+
+.controlButton:hover {
+  background-color: #f0f0f0;
+  border-color: #999;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.controlButton:active {
+  background-color: #e0e0e0;
+}
+
+.controlButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.executionStats {
+  display: flex;
+  gap: 16px;
+  margin-left: auto;
+  color: #666;
+  font-size: 12px;
+  align-items: center;
+}
+
+.statItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.statLabel {
+  font-weight: 500;
+  color: #666;
+}
+
+.statValue {
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  color: #333;
+  font-weight: 600;
+}
+
+.statusBadge {
+  padding: 4px 8px;
+  border-radius: 3px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.statusBadge.running {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.statusBadge.paused {
+  background-color: #fff3e0;
+  color: #e65100;
+}
+
+.statusBadge.breakpoint {
+  background-color: #ffebee;
+  color: #c62828;
+}
+
+.statusBadge.halted {
+  background-color: #f3e5f5;
+  color: #6a1b9a;
+}
+
+.stepInputContainer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.stepInput {
+  width: 60px;
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 12px;
+  text-align: center;
+}
+
+.stepInput:focus {
+  outline: none;
+  border-color: #2196f3;
+  box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.1);
+}
+
+/* ========== Tab Navigation ========== */
+
+.tabs {
+  display: flex;
+  border-bottom: 1px solid #e0e0e0;
+  background-color: #fafafa;
+}
+
+.tabButton {
+  flex: 1;
+  padding: 10px 12px;
+  border: none;
+  background-color: transparent;
+  font-size: 13px;
+  font-weight: 500;
+  color: #666;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.tabButton:hover {
+  color: #333;
+  background-color: #f0f0f0;
+}
+
+.tabButton.active {
+  color: #2196f3;
+  border-bottom-color: #2196f3;
+  background-color: white;
+}
+
+/* ========== Tab Content ========== */
+
+.tabContent {
+  flex: 1;
+  overflow: auto;
+  padding: 0;
+}
+
+/* ========== Register View ========== */
+
+.registerView {
+  padding: 12px;
+}
+
+.registerTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+}
+
+.registerTable thead {
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.registerTable th {
+  padding: 8px 12px;
+  text-align: left;
+  font-weight: 600;
+  color: #333;
+  border-right: 1px solid #e0e0e0;
+}
+
+.registerTable th:last-child {
+  border-right: none;
+}
+
+.registerTable tbody tr {
+  border-bottom: 1px solid #f0f0f0;
+  transition: background-color 0.2s ease;
+}
+
+.registerTable tbody tr:hover {
+  background-color: #f9f9f9;
+}
+
+.registerTable td {
+  padding: 8px 12px;
+  border-right: 1px solid #f0f0f0;
+  color: #333;
+}
+
+.registerTable td:last-child {
+  border-right: none;
+}
+
+.registerName {
+  font-weight: 600;
+  color: #2196f3;
+  min-width: 50px;
+}
+
+.registerHex {
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  color: #d32f2f;
+}
+
+.registerDecimal {
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  color: #1976d2;
+}
+
+.registerBinary {
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  color: #388e3c;
+  word-break: break-all;
+  max-width: 250px;
+}
+
+.cpsrFlags {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.flagBit {
+  padding: 2px 6px;
+  border-radius: 2px;
+  font-size: 10px;
+  font-weight: 600;
+  background-color: #f5f5f5;
+  border: 1px solid #e0e0e0;
+}
+
+.flagBit.set {
+  background-color: #ffebee;
+  color: #c62828;
+  border-color: #ef5350;
+}
+
+.flagBit.clear {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  border-color: #66bb6a;
+}
+
+/* ========== Memory Browser ========== */
+
+.memoryBrowser {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.memoryControls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.memoryInput {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 12px;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  flex: 1;
+  max-width: 150px;
+}
+
+.memoryInput:focus {
+  outline: none;
+  border-color: #2196f3;
+  box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.1);
+}
+
+.goButton {
+  padding: 6px 14px;
+  border: 1px solid #2196f3;
+  border-radius: 4px;
+  background-color: #2196f3;
+  color: white;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.goButton:hover {
+  background-color: #1976d2;
+  box-shadow: 0 2px 4px rgba(33, 150, 243, 0.3);
+}
+
+.hexDump {
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  overflow: auto;
+  max-height: 300px;
+}
+
+.hexDumpTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  background-color: white;
+}
+
+.hexDumpTable thead {
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #e0e0e0;
+  position: sticky;
+  top: 0;
+}
+
+.hexDumpTable th {
+  padding: 6px 8px;
+  text-align: center;
+  font-weight: 600;
+  color: #333;
+  border-right: 1px solid #e0e0e0;
+}
+
+.hexDumpTable th:first-child {
+  min-width: 60px;
+  text-align: left;
+}
+
+.hexDumpTable tbody tr {
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.hexDumpTable tbody tr:hover {
+  background-color: #f9f9f9;
+}
+
+.hexDumpTable td {
+  padding: 6px 8px;
+  text-align: center;
+  border-right: 1px solid #f0f0f0;
+  color: #333;
+}
+
+.hexDumpTable td:first-child {
+  text-align: left;
+  font-weight: 600;
+  color: #2196f3;
+  min-width: 60px;
+  border-right: 1px solid #e0e0e0;
+}
+
+.hexDumpTable td:last-child {
+  border-right: none;
+  text-align: left;
+  color: #666;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+}
+
+.hexByte {
+  color: #d32f2f;
+  font-weight: 500;
+}
+
+.hexByte.selected {
+  background-color: #fff9c4;
+  border-radius: 2px;
+  padding: 2px 4px;
+}
+
+.hexByte.ascii {
+  color: #388e3c;
+}
+
+/* ========== Breakpoint Manager ========== */
+
+.breakpointManager {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.breakpointInput {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.breakpointAddressInput {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 12px;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  flex: 1;
+  max-width: 150px;
+}
+
+.breakpointAddressInput:focus {
+  outline: none;
+  border-color: #2196f3;
+  box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.1);
+}
+
+.addButton {
+  padding: 6px 14px;
+  border: 1px solid #4caf50;
+  border-radius: 4px;
+  background-color: #4caf50;
+  color: white;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.addButton:hover {
+  background-color: #45a049;
+  box-shadow: 0 2px 4px rgba(76, 175, 80, 0.3);
+}
+
+.breakpointList {
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  max-height: 300px;
+  overflow: auto;
+}
+
+.breakpointItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-bottom: 1px solid #f0f0f0;
+  background-color: white;
+  transition: background-color 0.2s ease;
+}
+
+.breakpointItem:last-child {
+  border-bottom: none;
+}
+
+.breakpointItem:hover {
+  background-color: #f9f9f9;
+}
+
+.breakpointCheckbox {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: #2196f3;
+}
+
+.breakpointInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.breakpointAddress {
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-weight: 600;
+  color: #2196f3;
+  min-width: 80px;
+}
+
+.breakpointHitCount {
+  font-size: 11px;
+  color: #999;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+}
+
+.removeButton {
+  padding: 4px 8px;
+  border: none;
+  border-radius: 3px;
+  background-color: #f5f5f5;
+  color: #d32f2f;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 600;
+}
+
+.removeButton:hover {
+  background-color: #ffebee;
+  box-shadow: 0 2px 4px rgba(211, 47, 47, 0.2);
+}
+
+.emptyMessage {
+  padding: 20px;
+  text-align: center;
+  color: #999;
+  font-size: 12px;
+  font-style: italic;
+}
+
+/* ========== Scrollbar Styling ========== */
+
+.tabContent::-webkit-scrollbar,
+.hexDump::-webkit-scrollbar,
+.breakpointList::-webkit-scrollbar {
+  width: 8px;
+}
+
+.tabContent::-webkit-scrollbar-track,
+.hexDump::-webkit-scrollbar-track,
+.breakpointList::-webkit-scrollbar-track {
+  background: #f0f0f0;
+}
+
+.tabContent::-webkit-scrollbar-thumb,
+.hexDump::-webkit-scrollbar-thumb,
+.breakpointList::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+
+.tabContent::-webkit-scrollbar-thumb:hover,
+.hexDump::-webkit-scrollbar-thumb:hover,
+.breakpointList::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+
+/* ========== Responsive Design ========== */
+
+@media (max-width: 900px) {
+  .debuggerPanel {
+    font-size: 11px;
+  }
+
+  .controlBar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .executionStats {
+    margin-left: 0;
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .registerTable th,
+  .registerTable td {
+    padding: 6px 8px;
+    font-size: 11px;
+  }
+
+  .hexDumpTable th,
+  .hexDumpTable td {
+    padding: 4px 6px;
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  .debuggerPanel {
+    font-size: 10px;
+  }
+
+  .tabs {
+    flex-wrap: wrap;
+  }
+
+  .tabButton {
+    padding: 8px 10px;
+    font-size: 11px;
+  }
+
+  .controlButton {
+    padding: 6px 8px;
+    font-size: 11px;
+    min-width: 50px;
+  }
+
+  .registerTable {
+    font-size: 10px;
+  }
+
+  .registerTable th,
+  .registerTable td {
+    padding: 4px 6px;
+  }
+
+  .registerBinary {
+    display: none;
+  }
+
+  .hexDumpTable {
+    font-size: 9px;
+  }
+
+  .hexDumpTable th,
+  .hexDumpTable td {
+    padding: 3px 4px;
+  }
+}

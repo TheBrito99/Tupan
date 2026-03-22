@@ -1,0 +1,30 @@
+[build]
+# Default target for builds
+target-dir = "target"
+
+[profile.release]
+# Optimization level for release builds (3 = optimize for speed)
+opt-level = 3
+# Enable link-time optimization
+lto = true
+# Strip symbols for smaller binary
+strip = false
+# Enable code generation for all CPU features in target
+codegen-units = 1
+
+[profile.wasm]
+# Custom profile for WASM builds
+inherits = "release"
+# WASM needs special optimization
+opt-level = "z"     # Optimize for size
+lto = "thin"        # Use thin LTO for faster compilation
+strip = true        # Strip debug symbols
+
+[profile.wasm-dev]
+# Development profile for WASM (faster iteration)
+inherits = "dev"
+opt-level = 0
+debug = true
+debug-assertions = true
+overflow-checks = true
+lto = false

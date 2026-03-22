@@ -1,0 +1,206 @@
+.circuitPanel {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 14px;
+  background: linear-gradient(135deg, rgba(232, 178, 101, 0.04) 0%, rgba(24, 38, 45, 0.04) 100%);
+  border-radius: 8px;
+  border: 1px solid rgba(232, 178, 101, 0.15);
+}
+
+.circuitPanel h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(31, 37, 41, 0.8);
+}
+
+.categoryTabs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: 8px;
+}
+
+.categoryTab {
+  padding: 8px 12px;
+  border: 1px solid rgba(232, 178, 101, 0.2);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.6);
+  color: rgba(31, 37, 41, 0.7);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.categoryTab:hover {
+  border-color: rgba(232, 178, 101, 0.4);
+  background: rgba(232, 178, 101, 0.08);
+}
+
+.categoryTabActive {
+  border-color: rgba(232, 178, 101, 0.8);
+  background: rgba(232, 178, 101, 0.15);
+  color: rgba(31, 37, 41, 1);
+  box-shadow: 0 2px 8px rgba(232, 178, 101, 0.12);
+}
+
+.circuitList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 200px;
+  overflow-y: auto;
+  padding: 4px;
+}
+
+.circuitItem {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 10px 12px;
+  border: 1px solid rgba(232, 178, 101, 0.15);
+  border-radius: 6px;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.circuitItem:hover {
+  border-color: rgba(232, 178, 101, 0.3);
+  background: rgba(232, 178, 101, 0.06);
+}
+
+.circuitItemActive {
+  border-color: rgba(232, 178, 101, 0.6);
+  background: rgba(232, 178, 101, 0.12);
+  box-shadow: inset 0 0 8px rgba(232, 178, 101, 0.1);
+}
+
+.circuitName {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(31, 37, 41, 0.9);
+  margin-bottom: 2px;
+}
+
+.circuitDesc {
+  font-size: 10px;
+  color: rgba(31, 37, 41, 0.6);
+}
+
+.preview {
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(232, 178, 101, 0.1);
+  border-radius: 6px;
+}
+
+.preview h4 {
+  margin: 0 0 10px 0;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(31, 37, 41, 0.7);
+}
+
+.svgPreview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 120px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.5), rgba(232, 178, 101, 0.03));
+  border-radius: 4px;
+  overflow: auto;
+}
+
+.svgPreview :global(svg) {
+  max-width: 100%;
+  max-height: 100%;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.noPreview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 120px;
+  color: rgba(31, 37, 41, 0.5);
+  font-size: 12px;
+}
+
+.insertOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 6px;
+}
+
+.insertTypeLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: rgba(31, 37, 41, 0.8);
+  cursor: pointer;
+  user-select: none;
+}
+
+.insertTypeLabel input[type='radio'] {
+  cursor: pointer;
+  accent-color: rgba(232, 178, 101, 0.8);
+}
+
+.insertTypeLabel:has(input:disabled) {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.insertButton {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  background: linear-gradient(135deg, rgba(232, 178, 101, 0.9) 0%, rgba(232, 178, 101, 0.75) 100%);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(232, 178, 101, 0.25);
+}
+
+.insertButton:hover {
+  background: linear-gradient(135deg, rgba(232, 178, 101, 1) 0%, rgba(232, 178, 101, 0.85) 100%);
+  box-shadow: 0 4px 12px rgba(232, 178, 101, 0.35);
+  transform: translateY(-1px);
+}
+
+.insertButton:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(232, 178, 101, 0.2);
+}
+
+/* Scrollbar styling */
+.circuitList::-webkit-scrollbar {
+  width: 4px;
+}
+
+.circuitList::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.circuitList::-webkit-scrollbar-thumb {
+  background: rgba(232, 178, 101, 0.25);
+  border-radius: 2px;
+}
+
+.circuitList::-webkit-scrollbar-thumb:hover {
+  background: rgba(232, 178, 101, 0.4);
+}

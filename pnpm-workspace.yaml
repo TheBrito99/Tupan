@@ -1,6 +1,7 @@
 packages:
   - 'packages/*'
-  - 'tools/*'
 
-shamefully-hoist: false
-strict-peer-dependencies: false
+settings:
+  node-linker: hoisted
+  dedupe-peer-dependents: true
+  shamefully-hoist: false

@@ -1,0 +1,489 @@
+.editor {
+  display: flex;
+  height: 100%;
+  background-color: #f5f5f5;
+}
+
+.toolbar {
+  display: flex;
+  gap: 8px;
+  padding: 12px;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.toolbarButton {
+  padding: 6px 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.toolbarButton:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+.toolbarButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.separator {
+  width: 1px;
+  height: 24px;
+  background-color: #ddd;
+  margin: 0 4px;
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  gap: 0;
+}
+
+.palette {
+  width: 200px;
+  background-color: #fff;
+  border-right: 1px solid #ddd;
+  overflow-y: auto;
+  padding: 12px;
+}
+
+.palette h3 {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+}
+
+.paletteGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.paletteButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  background-color: #f9f9f9;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.2s;
+}
+
+.paletteButton:hover {
+  background-color: #f0f0f0;
+  border-color: #007bff;
+}
+
+.paletteIcon {
+  width: 20px;
+  height: 20px;
+  border-radius: 2px;
+}
+
+.paletteInfo {
+  font-size: 11px;
+  color: #666;
+  border-top: 1px solid #ddd;
+  padding-top: 12px;
+}
+
+.paletteInfo h4 {
+  margin: 0 0 8px 0;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.paletteInfo ul {
+  margin: 0;
+  padding-left: 16px;
+  list-style-type: disc;
+}
+
+.paletteInfo li {
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+
+.canvas {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border-right: 1px solid #ddd;
+  position: relative;
+}
+
+.svgCanvas {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  background-color: #fafafa;
+  cursor: grab;
+}
+
+.svgCanvas:active {
+  cursor: grabbing;
+}
+
+.zoomControls {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  gap: 4px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 4px;
+}
+
+.zoomControls button {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  background-color: #f0f0f0;
+  border-radius: 2px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.zoomControls button:hover {
+  background-color: #e0e0e0;
+}
+
+.zoomControls span {
+  padding: 0 8px;
+  line-height: 28px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #666;
+}
+
+.propertyPanel {
+  width: 280px;
+  background-color: #fff;
+  border-right: 1px solid #ddd;
+  overflow-y: auto;
+  padding: 12px;
+}
+
+.propertyPanel h3 {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+}
+
+.propertySection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.propertySection label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+  color: #666;
+}
+
+.propertySection strong {
+  color: #333;
+  font-weight: 600;
+}
+
+.input {
+  padding: 6px 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 12px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.1);
+}
+
+.readOnly {
+  padding: 6px 8px;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 12px;
+  color: #666;
+}
+
+.unit {
+  font-size: 10px;
+  color: #999;
+  font-style: italic;
+}
+
+.deleteButton {
+  padding: 8px 12px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.deleteButton:hover {
+  background-color: #c82333;
+}
+
+.analysisPanel {
+  width: 300px;
+  background-color: #fff;
+  overflow-y: auto;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.analysisPanel h3 {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+}
+
+.analysisPanel h4 {
+  margin: 12px 0 8px 0;
+  font-size: 12px;
+  font-weight: bold;
+  color: #555;
+}
+
+.analysisHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #ddd;
+}
+
+.analysisHeader h3 {
+  margin: 0;
+  flex: 1;
+}
+
+.analysisButton {
+  padding: 6px 12px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: bold;
+  white-space: nowrap;
+  transition: background-color 0.2s;
+}
+
+.analysisButton:hover:not(:disabled) {
+  background-color: #218838;
+}
+
+.analysisButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.analysisSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.analysisSection:last-child {
+  border-bottom: none;
+}
+
+.metricsTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.metricsTable td {
+  padding: 4px;
+  border-bottom: 1px solid #eee;
+}
+
+.metricsTable td:first-child {
+  color: #666;
+}
+
+.value {
+  text-align: right;
+  font-weight: bold;
+  color: #007bff;
+  font-family: 'Courier New', monospace;
+}
+
+.resultsTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+}
+
+.resultsTable thead {
+  background-color: #f5f5f5;
+}
+
+.resultsTable th,
+.resultsTable td {
+  padding: 4px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.resultsTable th {
+  font-weight: bold;
+  color: #333;
+}
+
+.resultsTable td:last-child {
+  text-align: right;
+}
+
+.temperaturesGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+.temperatureCard {
+  padding: 8px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tempComponentName {
+  font-size: 11px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.tempValue {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 13px;
+  font-weight: bold;
+  color: #007bff;
+  margin-bottom: 4px;
+  font-family: 'Courier New', monospace;
+}
+
+.tempCelsius {
+  font-size: 10px;
+  color: #999;
+  font-weight: normal;
+  margin-left: 4px;
+}
+
+.tempBar {
+  width: 100%;
+  height: 16px;
+  background-color: #e8e8e8;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.tempBarFill {
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.exportButton {
+  padding: 6px 12px;
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: bold;
+  transition: background-color 0.2s;
+  width: 100%;
+}
+
+.exportButton:hover {
+  background-color: #5a6268;
+}
+
+.placeholder {
+  color: #999;
+  font-size: 12px;
+  font-style: italic;
+  margin: 8px 0 0 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .palette {
+    width: 160px;
+  }
+
+  .propertyPanel {
+    width: 240px;
+  }
+
+  .analysisPanel {
+    width: 260px;
+  }
+}
+
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .palette,
+  .propertyPanel,
+  .analysisPanel {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #ddd;
+    max-height: 200px;
+  }
+
+  .canvas {
+    border-right: none;
+    flex: 1;
+  }
+}

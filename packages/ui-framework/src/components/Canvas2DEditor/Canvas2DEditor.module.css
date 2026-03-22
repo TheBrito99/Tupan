@@ -1,0 +1,277 @@
+/**
+ * Canvas 2D Editor Styles
+ *
+ * Responsive canvas-based 2D editor used by:
+ * - Schematic editor
+ * - PCB designer
+ * - General 2D CAD
+ * - 3D sketches
+ */
+
+.container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Canvas */
+.canvas {
+  flex: 1;
+  display: block;
+  cursor: crosshair;
+  background: white;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.canvas:focus {
+  outline: 2px solid #2196f3;
+  outline-offset: -2px;
+}
+
+/* Controls Overlay */
+.controls {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 8px 12px;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  pointer-events: auto;
+}
+
+/* Zoom Controls */
+.zoomControls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.controlButton {
+  padding: 6px 10px;
+  background: #f0f0f0;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  color: #333;
+  transition: all 0.2s ease;
+  min-width: 32px;
+  text-align: center;
+}
+
+.controlButton:hover {
+  background: #e0e0e0;
+  border-color: #999;
+}
+
+.controlButton:active {
+  background: #d0d0d0;
+  transform: scale(0.98);
+}
+
+.controlButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.zoomLevel {
+  min-width: 50px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: #333;
+  font-family: 'Courier New', monospace;
+}
+
+/* Layer Indicator */
+.layerIndicator {
+  padding: 4px 8px;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  font-size: 12px;
+  color: #333;
+  white-space: nowrap;
+}
+
+.layerIndicator strong {
+  color: #2196f3;
+  font-weight: 600;
+  font-family: 'Courier New', monospace;
+}
+
+/* Status Bar */
+.statusBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 12px;
+  background: #f9f9f9;
+  border-top: 1px solid #ddd;
+  font-size: 11px;
+  color: #666;
+  user-select: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .controls {
+    top: 8px;
+    left: 8px;
+    gap: 8px;
+  }
+
+  .controlButton {
+    padding: 4px 8px;
+    font-size: 12px;
+    min-width: 28px;
+  }
+
+  .zoomLevel {
+    min-width: 40px;
+    font-size: 11px;
+  }
+
+  .layerIndicator {
+    font-size: 10px;
+  }
+
+  .statusBar {
+    padding: 4px 8px;
+    font-size: 10px;
+  }
+}
+
+/* High DPI displays */
+@media (min-resolution: 192dpi) {
+  .canvas {
+    image-rendering: -webkit-optimize-contrast;
+  }
+}
+
+/* Print styles */
+@media print {
+  .controls,
+  .statusBar {
+    display: none;
+  }
+
+  .canvas {
+    border: none;
+    box-shadow: none;
+  }
+}
+
+/* Accessibility - focus indicators */
+.controlButton:focus {
+  outline: 2px solid #2196f3;
+  outline-offset: -2px;
+}
+
+.controlButton:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .container {
+    background: #2a2a2a;
+    border-color: #444;
+  }
+
+  .canvas {
+    background: #1e1e1e;
+  }
+
+  .controls {
+    background: rgba(0, 0, 0, 0.85);
+  }
+
+  .controlButton {
+    background: #333;
+    border-color: #555;
+    color: #ccc;
+  }
+
+  .controlButton:hover {
+    background: #444;
+    border-color: #666;
+  }
+
+  .controlButton:active {
+    background: #555;
+  }
+
+  .zoomLevel {
+    color: #ccc;
+  }
+
+  .layerIndicator {
+    background: #2a2a2a;
+    border-color: #444;
+    color: #ccc;
+  }
+
+  .layerIndicator strong {
+    color: #64b5f6;
+  }
+
+  .statusBar {
+    background: #2a2a2a;
+    border-color: #444;
+    color: #999;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.controls {
+  animation: fadeIn 0.2s ease;
+}
+
+/* Performance optimization - disable animations during interaction */
+.container.interacting {
+  /* Reduce paint operations during pan/zoom */
+}
+
+.container.interacting .statusBar {
+  will-change: auto;
+}
+
+/* Touch device support */
+@media (hover: none) and (pointer: coarse) {
+  .canvas {
+    touch-action: none;
+  }
+
+  .controlButton {
+    padding: 10px 14px;
+    min-width: 44px;
+    font-size: 14px;
+  }
+}

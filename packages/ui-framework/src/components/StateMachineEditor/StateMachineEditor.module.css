@@ -1,0 +1,261 @@
+/**
+ * State Machine Editor Styles
+ */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background-color: #fafafa;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    sans-serif;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+  padding: 0 12px;
+  gap: 12px;
+}
+
+.toolbarGroup {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.toolButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.toolButton:hover {
+  background-color: #f5f5f5;
+  border-color: #1976d2;
+  color: #1976d2;
+}
+
+.toolButton:active {
+  background-color: #e3f2fd;
+}
+
+.zoomLevel {
+  font-size: 12px;
+  color: #666;
+  min-width: 45px;
+  text-align: center;
+}
+
+.separator {
+  width: 1px;
+  height: 24px;
+  background-color: #ddd;
+}
+
+.help {
+  color: #999;
+  font-size: 12px;
+  cursor: help;
+}
+
+.editorArea {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  gap: 0;
+}
+
+.canvas {
+  flex: 1;
+  background-color: #fafafa;
+  cursor: crosshair;
+  border-right: 1px solid #ddd;
+}
+
+.propertyPanel {
+  width: 280px;
+  background-color: #fff;
+  border-left: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.panelHeader {
+  height: 40px;
+  padding: 10px 12px;
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #ddd;
+  font-weight: 600;
+  font-size: 12px;
+  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.panelContent {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px;
+}
+
+.propertySection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.propertyField {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.propertyField label {
+  font-size: 12px;
+  font-weight: 500;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.propertyField input[type='text'] {
+  padding: 6px 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 12px;
+  font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+  transition: border-color 0.2s ease;
+}
+
+.propertyField input[type='text']:focus {
+  outline: none;
+  border-color: #1976d2;
+  box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.1);
+}
+
+.propertyField input[type='text']:disabled {
+  background-color: #f5f5f5;
+  color: #999;
+  cursor: not-allowed;
+}
+
+.propertyField input[type='checkbox'] {
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+  margin: 0;
+}
+
+.propertyField input[type='checkbox']:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.input {
+  padding: 6px 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 12px;
+  transition: border-color 0.2s ease;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #1976d2;
+  box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.1);
+}
+
+.input:disabled {
+  background-color: #f5f5f5;
+  color: #999;
+  cursor: not-allowed;
+}
+
+.deleteButton {
+  width: 100%;
+  padding: 8px 12px;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-top: 12px;
+}
+
+.deleteButton:hover {
+  background-color: #d32f2f;
+}
+
+.deleteButton:active {
+  background-color: #c62828;
+}
+
+/* Scrollbar styling */
+.panelContent::-webkit-scrollbar {
+  width: 6px;
+}
+
+.panelContent::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.panelContent::-webkit-scrollbar-thumb {
+  background-color: #bdbdbd;
+  border-radius: 3px;
+}
+
+.panelContent::-webkit-scrollbar-thumb:hover {
+  background-color: #9e9e9e;
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+  .propertyPanel {
+    width: 220px;
+  }
+
+  .panelContent {
+    padding: 8px;
+  }
+}
+
+@media (max-width: 768px) {
+  .toolbar {
+    height: 40px;
+    padding: 0 8px;
+    gap: 6px;
+  }
+
+  .toolButton {
+    width: 32px;
+    height: 32px;
+    font-size: 12px;
+  }
+
+  .propertyPanel {
+    display: none;
+  }
+}

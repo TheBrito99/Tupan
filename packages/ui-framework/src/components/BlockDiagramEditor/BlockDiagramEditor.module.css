@@ -1,0 +1,490 @@
+/* Block Diagram Editor Styling */
+
+.blockDiagramEditor {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: #f5f5f5;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
+    Arial, sans-serif;
+}
+
+/* Toolbar */
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: white;
+  border-bottom: 1px solid #e0e0e0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.controls {
+  display: flex;
+  gap: 8px;
+}
+
+.modeButton {
+  padding: 8px 16px;
+  background: #f0f0f0;
+  border: 1px solid #d0d0d0;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  color: #333;
+  transition: all 0.2s;
+}
+
+.modeButton:hover {
+  background: #e8e8e8;
+  border-color: #b0b0b0;
+}
+
+.modeButton.active {
+  background: #2196f3;
+  color: white;
+  border-color: #1976d2;
+}
+
+.info {
+  display: flex;
+  gap: 20px;
+  font-size: 13px;
+  color: #666;
+}
+
+.analyzeButton {
+  padding: 8px 20px;
+  background: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.analyzeButton:hover {
+  background: #45a049;
+}
+
+.analyzeButton:active {
+  background: #3d8b40;
+}
+
+/* Error panel */
+.errorPanel {
+  padding: 12px 16px;
+  background: #ffebee;
+  border-bottom: 1px solid #f48fb1;
+  color: #c62828;
+  font-size: 13px;
+}
+
+.errorPanel strong {
+  display: block;
+  margin-bottom: 6px;
+  color: #b71c1c;
+}
+
+.errorPanel ul {
+  margin: 0;
+  padding-left: 20px;
+  list-style: disc;
+}
+
+.errorPanel li {
+  margin: 2px 0;
+}
+
+/* Main editor container */
+.editorContainer {
+  display: grid;
+  grid-template-columns: 200px 1fr 280px 300px;
+  gap: 0;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* Canvas container */
+.canvasContainer {
+  flex: 1;
+  background: white;
+  overflow: auto;
+  position: relative;
+}
+
+.canvas {
+  display: block;
+  background: white;
+  cursor: grab;
+}
+
+.canvas:active {
+  cursor: grabbing;
+}
+
+/* Palette */
+.palette {
+  background: white;
+  border-right: 1px solid #e0e0e0;
+  padding: 12px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.palette h3 {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+  color: #333;
+  font-weight: 600;
+}
+
+.paletteGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 6px;
+}
+
+.paletteButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  background: #f5f5f5;
+  border: 1px solid #e0e0e0;
+  border-left: 4px solid;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 12px;
+  color: #333;
+  transition: all 0.2s;
+}
+
+.paletteButton:hover {
+  background: #eeeeee;
+  border-color: #c0c0c0;
+}
+
+.paletteIcon {
+  width: 28px;
+  height: 28px;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.paletteInfo {
+  padding-top: 8px;
+  border-top: 1px solid #e0e0e0;
+  font-size: 11px;
+  color: #666;
+}
+
+.paletteInfo h4 {
+  margin: 0 0 6px 0;
+  font-size: 12px;
+  color: #333;
+  font-weight: 600;
+}
+
+.paletteInfo ul {
+  margin: 0;
+  padding-left: 16px;
+  list-style: disc;
+}
+
+.paletteInfo li {
+  margin: 3px 0;
+  line-height: 1.4;
+}
+
+.paletteHelp {
+  padding-top: 8px;
+  border-top: 1px solid #e0e0e0;
+  font-size: 11px;
+  color: #666;
+  line-height: 1.5;
+}
+
+.paletteHelp p {
+  margin: 0;
+}
+
+/* Property panel */
+.propertyPanel {
+  background: white;
+  border-left: 1px solid #e0e0e0;
+  border-right: 1px solid #e0e0e0;
+  padding: 12px;
+  overflow-y: auto;
+  font-size: 13px;
+}
+
+.propertyPanel h3 {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  color: #333;
+  font-weight: 600;
+}
+
+.propertyHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.propertyHeader h3 {
+  margin: 0;
+}
+
+.deleteButton {
+  width: 28px;
+  height: 28px;
+  border: 1px solid #d0d0d0;
+  background: #f5f5f5;
+  color: #d32f2f;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.deleteButton:hover {
+  background: #ffebee;
+  border-color: #f48fb1;
+}
+
+.propertySection {
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.propertySection h4 {
+  margin: 0 0 8px 0;
+  font-size: 12px;
+  color: #555;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.propertyField {
+  margin-bottom: 8px;
+}
+
+.propertyField label {
+  display: block;
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 3px;
+  font-weight: 500;
+}
+
+.propertyField input {
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid #d0d0d0;
+  border-radius: 3px;
+  font-size: 12px;
+  box-sizing: border-box;
+}
+
+.propertyField input:focus {
+  outline: none;
+  border-color: #2196f3;
+  box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.1);
+}
+
+.propertyField input:disabled {
+  background: #f5f5f5;
+  color: #999;
+  cursor: not-allowed;
+}
+
+.positionInputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.positionInputs > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.positionInputs input {
+  padding: 6px 8px;
+  border: 1px solid #d0d0d0;
+  border-radius: 3px;
+  font-size: 12px;
+}
+
+.placeholder {
+  color: #999;
+  font-style: italic;
+  text-align: center;
+  padding: 20px 0;
+}
+
+/* Analysis panel */
+.analysisPanel {
+  background: white;
+  border-left: 1px solid #e0e0e0;
+  padding: 12px;
+  overflow-y: auto;
+  font-size: 13px;
+}
+
+.analysisPanel h3 {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  color: #333;
+  font-weight: 600;
+}
+
+.analysisHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.analysisHeader h3 {
+  margin: 0;
+}
+
+.analysisSectionGroup {
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.analysisSectionGroup h4 {
+  margin: 0 0 8px 0;
+  font-size: 12px;
+  color: #555;
+  font-weight: 600;
+}
+
+.resultsTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+}
+
+.resultsTable thead {
+  background: #f5f5f5;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.resultsTable th {
+  padding: 6px 4px;
+  text-align: left;
+  color: #666;
+  font-weight: 600;
+}
+
+.resultsTable td {
+  padding: 4px;
+  border-bottom: 1px solid #f0f0f0;
+  color: #333;
+}
+
+.resultsTable tbody tr:nth-child(even) {
+  background: #fafafa;
+}
+
+.resultsTable tbody tr:hover {
+  background: #f0f8ff;
+}
+
+.value {
+  text-align: right;
+  font-family: 'Courier New', monospace;
+  color: #0066cc;
+}
+
+.exportButtons {
+  display: flex;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.exportButton {
+  flex: 1;
+  padding: 6px 8px;
+  background: #f5f5f5;
+  border: 1px solid #d0d0d0;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 11px;
+  color: #333;
+  transition: all 0.2s;
+}
+
+.exportButton:hover {
+  background: #eeeeee;
+  border-color: #b0b0b0;
+}
+
+/* Responsive layout */
+@media (max-width: 1200px) {
+  .editorContainer {
+    grid-template-columns: 180px 1fr 250px;
+  }
+
+  .analysisPanel {
+    display: none;
+  }
+}
+
+@media (max-width: 800px) {
+  .editorContainer {
+    grid-template-columns: 1fr 250px;
+  }
+
+  .palette {
+    display: none;
+  }
+}
+
+/* Scrollbar styling */
+.palette::-webkit-scrollbar,
+.propertyPanel::-webkit-scrollbar,
+.analysisPanel::-webkit-scrollbar {
+  width: 8px;
+}
+
+.palette::-webkit-scrollbar-track,
+.propertyPanel::-webkit-scrollbar-track,
+.analysisPanel::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.palette::-webkit-scrollbar-thumb,
+.propertyPanel::-webkit-scrollbar-thumb,
+.analysisPanel::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+
+.palette::-webkit-scrollbar-thumb:hover,
+.propertyPanel::-webkit-scrollbar-thumb:hover,
+.analysisPanel::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}

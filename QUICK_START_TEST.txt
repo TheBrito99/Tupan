@@ -1,0 +1,40 @@
+QUICK START TESTING - Phase 45
+
+STEP 1: Install Dependencies
+  cd packages/web-app && pnpm install
+  
+STEP 2: Build (verify no errors)
+  pnpm build
+
+STEP 3: Start Dev Server
+  pnpm dev
+  
+STEP 4: Open http://localhost:5173 in browser
+
+STEP 5: Test These (should all work):
+  [ ] Dashboard loads with 5 simulator cards
+  [ ] Navigation menu works (click each item)
+  [ ] Theme toggle button (☀️/🌙) changes colors
+  [ ] State Machine page shows editor + simulate button
+  [ ] Petri Net page shows editor + simulate button
+  [ ] Click "Simulate" shows Plotly chart on right
+  [ ] Export button downloads JSON file
+  [ ] Responsive design (resize to 480px, 768px, 1024px)
+  [ ] Footer appears at bottom with links
+  [ ] No red errors in DevTools console (F12)
+
+Expected Results:
+  ✓ All pages load without errors
+  ✓ Theme toggle works instantly
+  ✓ Editors render with placeholder or actual components
+  ✓ Plots display time-series data
+  ✓ Responsive layout adapts to screen size
+  ✓ No console errors or undefined variables
+
+Time Expected: 10-15 minutes for full build + testing
+
+If you see errors:
+  1. Check pnpm install completed successfully
+  2. Verify TypeScript: pnpm build (see full error messages)
+  3. Check browser console (F12) for specific errors
+  4. Try: pnpm install --force if dependency issues

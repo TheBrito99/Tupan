@@ -1,0 +1,310 @@
+/**
+ * Property Panel Styles
+ * Phase 17.4: CAD Editor Properties
+ */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+  padding: 0;
+}
+
+/* Sections */
+.section {
+  margin-bottom: 16px;
+  padding: 12px 12px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.section:last-child {
+  margin-bottom: 0;
+  border-bottom: none;
+}
+
+.sectionTitle {
+  margin: 0 0 12px 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: #666666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Info grid */
+.infoGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.infoItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 12px;
+}
+
+.infoItem:last-child {
+  border-bottom: none;
+}
+
+.label {
+  font-weight: 600;
+  color: #666666;
+}
+
+.value {
+  color: #1a1a1a;
+  font-family: 'Monaco', 'Menlo', monospace;
+}
+
+.statusOk {
+  color: #238636;
+  font-weight: 600;
+}
+
+.statusWarn {
+  color: #dd7815;
+  font-weight: 600;
+}
+
+/* Constraints list */
+.constraintsList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.constraintItem {
+  padding: 8px 10px;
+  background: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.constraintHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.constraintType {
+  font-weight: 600;
+  color: #0066cc;
+}
+
+.drivingBadge {
+  padding: 2px 6px;
+  background: #d6e8f7;
+  color: #0066cc;
+  border-radius: 3px;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.referenceBadge {
+  padding: 2px 6px;
+  background: #f0f0f0;
+  color: #999999;
+  border-radius: 3px;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.constraintValue {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.valueDisplay {
+  color: #666666;
+  font-family: 'Monaco', 'Menlo', monospace;
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: 2px;
+  transition: all 0.2s ease;
+}
+
+.valueDisplay:hover {
+  background: #e0e0e0;
+  color: #1a1a1a;
+}
+
+.editInput {
+  width: 60px;
+  padding: 4px 6px;
+  background: #ffffff;
+  border: 1px solid #0066cc;
+  border-radius: 3px;
+  font-size: 12px;
+  font-family: 'Monaco', 'Menlo', monospace;
+  color: #1a1a1a;
+}
+
+.editInput:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.2);
+}
+
+/* Parameters list */
+.parametersList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.parameterItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.paramLabel {
+  font-size: 12px;
+  font-weight: 600;
+  color: #666666;
+}
+
+.paramInput {
+  padding: 6px 8px;
+  background: #ffffff;
+  border: 1px solid #d0d0d0;
+  border-radius: 4px;
+  font-size: 12px;
+  font-family: 'Monaco', 'Menlo', monospace;
+  color: #1a1a1a;
+  transition: border-color 0.2s ease;
+}
+
+.paramInput:focus {
+  outline: none;
+  border-color: #0066cc;
+  box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+}
+
+/* Empty state */
+.emptyState {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  color: #999999;
+  font-size: 13px;
+  text-align: center;
+  padding: 20px;
+}
+
+/* Scrollbars */
+.container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.container::-webkit-scrollbar-thumb {
+  background: #d0d0d0;
+  border-radius: 4px;
+}
+
+.container::-webkit-scrollbar-thumb:hover {
+  background: #999999;
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  .section {
+    border-bottom-color: #333333;
+  }
+
+  .sectionTitle {
+    color: #8b949e;
+  }
+
+  .infoItem {
+    border-bottom-color: #333333;
+  }
+
+  .label {
+    color: #8b949e;
+  }
+
+  .value {
+    color: #e5e5e5;
+  }
+
+  .constraintItem {
+    background: #2a2a2a;
+    border-color: #333333;
+  }
+
+  .constraintType {
+    color: #58a6ff;
+  }
+
+  .drivingBadge {
+    background: #1f3a5e;
+    color: #58a6ff;
+  }
+
+  .referenceBadge {
+    background: #333333;
+    color: #666666;
+  }
+
+  .valueDisplay {
+    color: #8b949e;
+  }
+
+  .valueDisplay:hover {
+    background: #333333;
+    color: #e5e5e5;
+  }
+
+  .editInput {
+    background: #3a3a3a;
+    border-color: #0066cc;
+    color: #e5e5e5;
+  }
+
+  .editInput:focus {
+    box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.3);
+  }
+
+  .paramLabel {
+    color: #8b949e;
+  }
+
+  .paramInput {
+    background: #3a3a3a;
+    border-color: #444444;
+    color: #e5e5e5;
+  }
+
+  .paramInput:focus {
+    border-color: #0066cc;
+    box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.2);
+  }
+
+  .emptyState {
+    color: #666666;
+  }
+
+  .container::-webkit-scrollbar-thumb {
+    background: #333333;
+  }
+
+  .container::-webkit-scrollbar-thumb:hover {
+    background: #555555;
+  }
+}

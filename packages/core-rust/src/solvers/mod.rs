@@ -12,8 +12,10 @@ use serde::{Deserialize, Serialize};
 use crate::error::{Result, TupanError};
 
 pub mod ode;
+pub mod mna_generic;
 
 pub use ode::{OdeSolver, RungeKuttaMethod};
+pub use mna_generic::GenericMnaSolver;
 
 /// Configuration for solvers
 #[derive(Debug, Clone, Serialize, Deserialize)]
