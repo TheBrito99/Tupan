@@ -59,8 +59,14 @@ tupan_core_bg.wasm.d.ts
 # Large files
 *.iso
 *.dmg
-*.exe
 *.msi
+
+# Build artifacts & corrupted files from failed commands
+libdpi
+libdir_sys
+*Users*guibr*
+c:Users*
+*"
 
 # OS
 Thumbs.db
