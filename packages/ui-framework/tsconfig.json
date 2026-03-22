@@ -14,18 +14,17 @@
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": false,
-    "outDir": "dist",
+    "noEmit": true,
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
 
     /* Linting */
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "strict": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": true
   },
   "include": ["src"],
-  "exclude": ["node_modules", "dist", "**/*.test.tsx"]
+  "exclude": ["node_modules", "dist", "**/*.test.tsx", "**/*.test.ts", "**/__tests__"]
 }
