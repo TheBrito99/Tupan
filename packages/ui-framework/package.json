@@ -9,7 +9,8 @@
     ".": {
       "import": "./src/index.ts",
       "types": "./src/index.ts"
-    }
+    },
+    "./components/*": "./src/components/*"
   },
   "scripts": {
     "build": "tsc",

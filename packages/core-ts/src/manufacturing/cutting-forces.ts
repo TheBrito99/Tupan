@@ -224,7 +224,7 @@ export class CuttingForcesBridge {
   ): number {
     // Base wear rate
     const baseWearRate = 0.00001;
-    const forceF actor = Math.max(tangentialForce / 1000, 0.1);
+    const forceFactor = Math.max(tangentialForce / 1000, 0.1);
     const coolantFactor = coolantAvailable ? 0.7 : 1.0;
     const materialFactor: Record<string, number> = {
       HSS: 1.0,

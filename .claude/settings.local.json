@@ -47,7 +47,10 @@
       "Bash(git checkout:*)",
       "Bash(pnpm config:*)",
       "Bash(npm ping:*)",
-      "Bash(tsc)"
+      "Bash(tsc)",
+      "Bash(npx vite build)",
+      "Bash(npx vite build:*)",
+      "Bash(cargo tauri:*)"
     ]
   }
 }

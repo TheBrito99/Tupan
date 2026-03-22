@@ -199,3 +199,6 @@ export class CADDocumentBridge {
     point2Id: string,
     distance: number
   ): string {
+    return `${sketchId}-constraint-distance-${point1Id}-${point2Id}-${distance}`;
+  }
+}
