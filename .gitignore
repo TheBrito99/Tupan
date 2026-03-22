@@ -1,0 +1,70 @@
+# Dependencies
+node_modules/
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# PNPM
+.pnpm/
+
+# Build outputs
+dist/
+build/
+*.js.map
+*.ts.map
+*.css.map
+
+# Rust/Cargo
+target/
+Cargo.lock
+*.rlib
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+*.sublime-project
+*.sublime-workspace
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Testing
+coverage/
+.nyc_output/
+*.lcov
+
+# Tauri
+src-tauri/target/
+src-tauri/Cargo.lock
+
+# Misc
+*.log
+.cache/
+.tmp/
+*.bak
+*.orig
+
+# Generated files
+tupan_core.wasm
+tupan_core.d.ts
+tupan_core_bg.wasm
+tupan_core_bg.wasm.d.ts
+
+# Large files
+*.iso
+*.dmg
+*.exe
+*.msi
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Antivirus temp
+nul
